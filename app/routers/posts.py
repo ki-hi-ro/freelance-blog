@@ -1,8 +1,12 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 
+# APIRouterインスタンスを作成 
+# posts関連APIをまとめるための「小さなアプリ」のような存在
 router = APIRouter()
 
+# 投稿データの型定義 
+# POST /posts のリクエスト時に使われる
 class Post(BaseModel):
     title: str
     content: str
@@ -27,12 +31,15 @@ posts = [
     },
 ]
 
-
+# 記事一覧取得API
+# GET /posts
 @router.get("/posts")
 def read_posts():
+    # postsリストをそのまま返す
     return posts
 
-
+# 記事詳細取得API 
+# GET /posts/1 のように使う
 @router.get("/posts/{post_id}")
 def read_post(post_id: int):
     for post in posts:
@@ -41,7 +48,8 @@ def read_post(post_id: int):
 
     return {"error": "Post not found"}
 
-
+# 記事作成API 
+# POST /posts
 @router.post("/posts")
 def create_post(post: Post):
     new_post = {
