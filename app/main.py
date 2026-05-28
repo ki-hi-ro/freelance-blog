@@ -14,12 +14,6 @@ app.include_router(posts_router.router)
 
 templates = Jinja2Templates(directory="app/templates")
 
-sample_posts = [
-    {"title": "記事1", "content": "本文1"},
-    {"title": "記事2", "content": "本文2"},
-]
-
-
 def get_db():
     db = SessionLocal()
     try:
@@ -34,9 +28,10 @@ def read_root():
 
 
 @app.get("/posts-page")
-def posts_page(request: Request):
-  return templates.TemplateResponse(
-      request,
-      "posts.html",
-      {"posts": sample_posts}
-  )
+def posts_page(request: Request, db: Session = Depends(get_db)):
+    posts = db.query(models.Post).all()
+    return templates.TemplateResponse(
+        request,
+        "posts.html",
+        {"posts": posts}
+    )
