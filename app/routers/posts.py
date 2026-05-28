@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.schemas import Post
@@ -27,7 +27,7 @@ def read_post(post_id: int, db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == post_id).first()
 
     if post is None:
-        return {"error": "Post not found"}
+      raise HTTPException(status_code=404, detail="Post not found")
 
     return post
 
@@ -54,9 +54,9 @@ def create_post(post: Post, db: Session = Depends(get_db)):
 @router.put("/posts/{post_id}")
 def update_post(post_id: int, post: Post, db: Session = Depends(get_db)):
     db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
-
+    
     if db_post is None:
-        return {"error": "Post not found"}
+      raise HTTPException(status_code=404, detail="Post not found")
 
     db_post.title = post.title
     db_post.content = post.content
@@ -77,7 +77,7 @@ def delete_post(post_id: int, db: Session = Depends(get_db)):
     db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
 
     if db_post is None:
-        return {"error": "Post not found"}
+      raise HTTPException(status_code=404, detail="Post not found")
 
     db.delete(db_post)
     db.commit()
