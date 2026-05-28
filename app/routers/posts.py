@@ -1,17 +1,9 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+from app.schemas import Post
 
 # APIRouterインスタンスを作成 
 # posts関連APIをまとめるための「小さなアプリ」のような存在
 router = APIRouter()
-
-# 投稿データの型定義 
-# POST /posts のリクエスト時に使われる
-class Post(BaseModel):
-    title: str
-    content: str
-    tags: list[str]
-    work_time_minutes: int
 
 
 posts = [
