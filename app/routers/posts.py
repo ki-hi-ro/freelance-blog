@@ -1,58 +1,49 @@
-from fastapi import APIRouter
-from app.schemas import Post
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 
-# APIRouterインスタンスを作成 
-# posts関連APIをまとめるための「小さなアプリ」のような存在
+from app.schemas import Post
+from app.database import SessionLocal
+from app import models
+
 router = APIRouter()
 
 
-posts = [
-    {
-        "id": 1,
-        "title": "職人的フリーランスへの第一歩",
-        "content": "FastAPIで自分のブログサービスを作り始めた。",
-        "tags": ["FastAPI", "Python", "Freelance"],
-        "work_time_minutes": 30,
-    },
-    {
-        "id": 2,
-        "title": "理想の働き方につながるものだけを積む",
-        "content": "市場に見える形で成果物を積み上げていく。",
-        "tags": ["Career", "Portfolio"],
-        "work_time_minutes": 45,
-    },
-]
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-# 記事一覧取得API
-# GET /posts
+
 @router.get("/posts")
-def read_posts():
-    # postsリストをそのまま返す
+def read_posts(db: Session = Depends(get_db)):
+    posts = db.query(models.Post).all()
     return posts
 
-# 記事詳細取得API 
-# GET /posts/1 のように使う
+
 @router.get("/posts/{post_id}")
-def read_post(post_id: int):
-    for post in posts:
-        if post["id"] == post_id:
-            return post
+def read_post(post_id: int, db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == post_id).first()
 
-    return {"error": "Post not found"}
+    if post is None:
+        return {"error": "Post not found"}
 
-# 記事作成API 
-# POST /posts
+    return post
+
+
 @router.post("/posts")
-def create_post(post: Post):
-    new_post = {
-        "id": len(posts) + 1,
-        "title": post.title,
-        "content": post.content,
-        "tags": post.tags,
-        "work_time_minutes": post.work_time_minutes,
-    }
+def create_post(post: Post, db: Session = Depends(get_db)):
+    new_post = models.Post(
+        title=post.title,
+        content=post.content,
+        tags=",".join(post.tags),
+        work_time_minutes=post.work_time_minutes,
+    )
 
-    posts.append(new_post)
+    db.add(new_post)
+    db.commit()
+    db.refresh(new_post)
 
     return {
         "message": "Post created successfully",
