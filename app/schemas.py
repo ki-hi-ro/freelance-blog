@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class Post(BaseModel):
@@ -14,6 +15,7 @@ class PostResponse(BaseModel):
     content: str
     tags: list[str]
     work_time_minutes: int
+    created_at: datetime
 
     class Config:
         from_attributes = True

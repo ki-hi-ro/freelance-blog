@@ -12,8 +12,9 @@ def convert_post(post):
         "id": post.id,
         "title": post.title,
         "content": post.content,
-        "tags": post.tags.split(","),
+        "tags": post.tags.split(",") if post.tags else [],
         "work_time_minutes": post.work_time_minutes,
+        "created_at": post.created_at,
     }
 
 def get_db():
@@ -54,10 +55,7 @@ def create_post(post: Post, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_post)
 
-    return {
-        "message": "Post created successfully",
-        "post": convert_post(new_post),
-    }
+    return convert_post(new_post)
 
 
 @router.put("/posts/{post_id}", response_model=PostResponse)
@@ -75,10 +73,7 @@ def update_post(post_id: int, post: Post, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_post)
 
-    return {
-        "message": "Post updated successfully",
-        "post": convert_post(db_post),
-    }
+    return convert_post(db_post)
 
 
 @router.delete("/posts/{post_id}")
