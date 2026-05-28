@@ -7,6 +7,14 @@ from app import models
 
 router = APIRouter()
 
+def convert_post(post):
+    return {
+        "id": post.id,
+        "title": post.title,
+        "content": post.content,
+        "tags": post.tags.split(","),
+        "work_time_minutes": post.work_time_minutes,
+    }
 
 def get_db():
     db = SessionLocal()
@@ -19,7 +27,8 @@ def get_db():
 @router.get("/posts", response_model=list[PostResponse])
 def read_posts(db: Session = Depends(get_db)):
     posts = db.query(models.Post).all()
-    return posts
+
+    return [convert_post(post) for post in posts]
 
 
 @router.get("/posts/{post_id}", response_model=PostResponse)
@@ -29,7 +38,7 @@ def read_post(post_id: int, db: Session = Depends(get_db)):
     if post is None:
         raise HTTPException(status_code=404, detail="Post not found")
 
-    return post
+    return convert_post(post)
 
 
 @router.post("/posts", response_model=PostResponse)
@@ -47,7 +56,7 @@ def create_post(post: Post, db: Session = Depends(get_db)):
 
     return {
         "message": "Post created successfully",
-        "post": new_post,
+        "post": convert_post(new_post),
     }
 
 
@@ -68,7 +77,7 @@ def update_post(post_id: int, post: Post, db: Session = Depends(get_db)):
 
     return {
         "message": "Post updated successfully",
-        "post": db_post,
+        "post": convert_post(db_post),
     }
 
 

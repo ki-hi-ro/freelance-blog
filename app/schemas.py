@@ -12,7 +12,7 @@ class PostResponse(BaseModel):
     id: int
     title: str
     content: str
-    tags: str
+    tags: list[str]
     work_time_minutes: int
 
     class Config:
