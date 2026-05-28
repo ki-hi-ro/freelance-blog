@@ -49,3 +49,39 @@ def create_post(post: Post, db: Session = Depends(get_db)):
         "message": "Post created successfully",
         "post": new_post,
     }
+
+
+@router.put("/posts/{post_id}")
+def update_post(post_id: int, post: Post, db: Session = Depends(get_db)):
+    db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
+
+    if db_post is None:
+        return {"error": "Post not found"}
+
+    db_post.title = post.title
+    db_post.content = post.content
+    db_post.tags = ",".join(post.tags)
+    db_post.work_time_minutes = post.work_time_minutes
+
+    db.commit()
+    db.refresh(db_post)
+
+    return {
+        "message": "Post updated successfully",
+        "post": db_post,
+    }
+
+
+@router.delete("/posts/{post_id}")
+def delete_post(post_id: int, db: Session = Depends(get_db)):
+    db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
+
+    if db_post is None:
+        return {"error": "Post not found"}
+
+    db.delete(db_post)
+    db.commit()
+
+    return {
+        "message": "Post deleted successfully",
+    }
