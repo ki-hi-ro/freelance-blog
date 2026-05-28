@@ -1,6 +1,15 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
+
+
+class Post(BaseModel):
+    title: str
+    content: str
+    tags: list[str]
+    work_time_minutes: int
+
 
 posts = [
     {
@@ -37,3 +46,21 @@ def read_post(post_id: int):
             return post
 
     return {"error": "Post not found"}
+
+
+@app.post("/posts")
+def create_post(post: Post):
+    new_post = {
+        "id": len(posts) + 1,
+        "title": post.title,
+        "content": post.content,
+        "tags": post.tags,
+        "work_time_minutes": post.work_time_minutes,
+    }
+
+    posts.append(new_post)
+
+    return {
+        "message": "Post created successfully",
+        "post": new_post,
+    }
