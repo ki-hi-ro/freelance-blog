@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Freelance Blog Service</title>
+</head>
+<body>
+    <h1>Freelance Blog Service</h1>
+    <p>開発ログ・進捗共有・技術記事を可視化するブログサービスです。</p>
+
+    <hr>
+
+    {% for post in posts %}
+        <article>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+            <p>タグ: {{ post.tags }}</p>
+            <p>作業時間: {{ post.work_time_minutes }}分</p>
+            <p>作成日時: {{ post.created_at }}</p>
+        </article>
+        <hr>
+    {% endfor %}
+</body>
+</html>
