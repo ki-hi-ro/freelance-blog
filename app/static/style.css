@@ -79,3 +79,42 @@ button {
 .content li + li {
   margin-top: 4px;
 }
+
+.work-detail {
+  background: #fff;
+  padding: 32px;
+  border-radius: 16px;
+  margin-bottom: 32px;
+}
+
+.work-meta {
+  margin: 16px 0;
+  color: #555;
+}
+
+.work-links {
+  display: flex;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.log-card {
+  background: #fff;
+  padding: 24px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.log-card h3 {
+  margin-top: 0;
+}
+
+.log-meta {
+  color: #555;
+  margin: 8px 0 16px;
+}
+
+.detail-link {
+  display: inline-block;
+  margin-top: 8px;
+}
