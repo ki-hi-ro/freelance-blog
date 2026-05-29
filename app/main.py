@@ -131,3 +131,38 @@ def post_detail_page(post_id: int, request: Request, db: Session = Depends(get_d
         "post_detail.html",
         {"post": post}
     )
+
+@app.get("/works-page")
+def works_page(request: Request, db: Session = Depends(get_db)):
+    works = db.query(models.Work).all()
+
+    for work in works:
+        work.description = markdown.markdown(work.description)
+
+    return templates.TemplateResponse(
+        request,
+        "works.html",
+        {"works": works}
+    )
+
+@app.post("/works-page")
+def create_work_from_page(
+    title: str = Form(...),
+    description: str = Form(...),
+    github_url: str = Form(""),
+    app_url: str = Form(""),
+    technologies: str = Form(""),
+    db: Session = Depends(get_db),
+):
+    new_work = models.Work(
+        title=title,
+        description=description,
+        github_url=github_url,
+        app_url=app_url,
+        technologies=technologies,
+    )
+
+    db.add(new_work)
+    db.commit()
+
+    return RedirectResponse(url="/works-page", status_code=303)

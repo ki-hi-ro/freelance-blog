@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="/static/style.css">
+
+<h1>Portfolio Works</h1>
+
+<p>作成した成果物・ポートフォリオ項目を管理します。</p>
+
+<hr>
+
+<h2>新規Work登録</h2>
+
+<form action="/works-page" method="post">
+  <div>
+    <label>タイトル</label><br>
+    <input type="text" name="title">
+  </div>
+
+  <div>
+    <label>説明</label><br>
+    <textarea name="description"></textarea>
+  </div>
+
+  <div>
+    <label>GitHub URL</label><br>
+    <input type="text" name="github_url">
+  </div>
+
+  <div>
+    <label>公開URL</label><br>
+    <input type="text" name="app_url">
+  </div>
+
+  <div>
+    <label>技術（カンマ区切り）</label><br>
+    <input type="text" name="technologies">
+  </div>
+
+  <button type="submit">登録する</button>
+</form>
+
+<hr>
+
+{% for work in works %}
+  <div class="post-card">
+    <h2>{{ work.title }}</h2>
+
+    <div class="content">
+      {{ work.description | safe }}
+    </div>
+
+    <p>技術: {{ work.technologies }}</p>
+
+    {% if work.github_url %}
+      <p><a href="{{ work.github_url }}" target="_blank">GitHub</a></p>
+    {% endif %}
+
+    {% if work.app_url %}
+      <p><a href="{{ work.app_url }}" target="_blank">公開URL</a></p>
+    {% endif %}
+  </div>
+{% endfor %}
