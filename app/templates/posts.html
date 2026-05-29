@@ -2,16 +2,16 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Freelance Blog Service</title>
+    <title>開発ログ管理</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Freelance Blog Service</h1>
-    <p>開発ログ・進捗共有・技術記事を可視化するブログサービスです。</p>
+    <h1>開発ログ管理</h1>
+    <p>成果物ごとの開発作業・判断・学びを記録するポートフォリオ管理サービスです。</p>
 
     <hr>
 
-    <h2>新規投稿</h2>
+    <h2>新規作業ログ</h2>
 
     <form action="/posts-page" method="post">
     <div>
@@ -20,7 +20,7 @@
     </div>
 
     <div>
-        <label>本文</label><br>
+        <label>作業内容</label><br>
         <textarea name="content"></textarea>
     </div>
 
@@ -49,7 +49,7 @@
     </div>
     
 
-    <button type="submit">投稿する</button>
+    <button type="submit">作業ログを登録する</button>
     </form>
 
     <hr>    
@@ -75,7 +75,7 @@
         <button type="submit">削除</button>
         </form>
 
-        <a href="/posts-page/{{ post.id }}">詳細を見る</a>
+        <a href="/posts-page/{{ post.id }}">作業ログ詳細を見る</a>
     </div>
     {% endfor %}    
 </body>
