@@ -8,6 +8,8 @@ from app.routers import posts as posts_router
 from app.database import engine, SessionLocal
 from app import models
 
+import markdown
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -34,6 +36,16 @@ def read_root():
 @app.get("/posts-page")
 def posts_page(request: Request, db: Session = Depends(get_db)):
     posts = db.query(models.Post).all()
+
+    for post in posts:
+        post.content = markdown.markdown(
+            post.content,
+            extensions=[
+                "fenced_code",
+                "codehilite",
+            ]
+        )
+
     return templates.TemplateResponse(
         request,
         "posts.html",
