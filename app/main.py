@@ -55,9 +55,6 @@ def posts_page(
 
     works = db.query(models.Work).all()
 
-    for post in posts:
-        post.content = markdown.markdown(post.content)
-
     return templates.TemplateResponse(
         request,
         "posts.html",
