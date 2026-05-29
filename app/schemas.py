@@ -6,7 +6,8 @@ class Post(BaseModel):
     title: str
     content: str
     tags: list[str]
-    work_time_minutes: int
+    start_time: datetime
+    end_time: datetime
 
 
 class PostResponse(BaseModel):

@@ -7,9 +7,11 @@ class Post(Base):
     __tablename__ = "posts"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
+    title = Column(String)
     content = Column(String)
     tags = Column(String)
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
     work_time_minutes = Column(Integer)
     created_at = Column(DateTime, default=datetime.now)
 

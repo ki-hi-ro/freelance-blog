@@ -12,6 +12,8 @@ from app import models
 
 import markdown
 
+from datetime import datetime
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -51,9 +53,17 @@ def create_post_from_page(
     title: str = Form(...),
     content: str = Form(...),
     tags: str = Form(""),
-    work_time_minutes: int = Form(...),
+    start_time: str = Form(...),
+    end_time: str = Form(...),    
     db: Session = Depends(get_db),
 ):
+    start_dt = datetime.fromisoformat(start_time)
+    end_dt = datetime.fromisoformat(end_time)
+
+    work_time_minutes = int(
+        (end_dt - start_dt).total_seconds() / 60
+    )
+
     new_post = models.Post(
         title=title,
         content=content,

@@ -13,6 +13,8 @@ def convert_post(post):
         "title": post.title,
         "content": post.content,
         "tags": post.tags.split(",") if post.tags else [],
+        "start_time": post.start_time,
+        "end_time": post.end_time,
         "work_time_minutes": post.work_time_minutes,
         "created_at": post.created_at,
     }
@@ -44,11 +46,13 @@ def read_post(post_id: int, db: Session = Depends(get_db)):
 
 @router.post("/posts", response_model=PostResponse)
 def create_post(post: Post, db: Session = Depends(get_db)):
+    work_time_minutes = int((post.end_time - post.start_time).total_seconds() / 60)
+
     new_post = models.Post(
         title=post.title,
         content=post.content,
         tags=",".join(post.tags),
-        work_time_minutes=post.work_time_minutes,
+        work_time_minutes=work_time_minutes,
     )
 
     db.add(new_post)
