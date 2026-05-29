@@ -111,3 +111,19 @@ def update_post_from_page(
         db.commit()
 
     return RedirectResponse(url="/posts-page", status_code=303)
+
+@app.get("/posts-page/{post_id}")
+def post_detail_page(post_id: int, request: Request, db: Session = Depends(get_db)):
+    post = db.query(models.Post).filter(models.Post.id == post_id).first()
+
+    if post:
+        post.content = markdown.markdown(
+            post.content,
+            extensions=["fenced_code"]
+        )
+
+    return templates.TemplateResponse(
+        request,
+        "post_detail.html",
+        {"post": post}
+    )

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ post.title }}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="post-card">
+    <h1>{{ post.title }}</h1>
+
+    <div class="content">
+      {{ post.content | safe }}
+    </div>
+
+    <p>タグ: {{ post.tags }}</p>
+    <p>作業時間: {{ post.work_time_minutes }}分</p>
+    <p>作成日時: {{ post.created_at }}</p>
+
+    <a href="/posts-page">一覧へ戻る</a>
+  </div>
+</body>
+</html>
