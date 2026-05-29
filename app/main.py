@@ -208,6 +208,41 @@ def create_work_from_page(
 
     return RedirectResponse(url="/works-page", status_code=303)
 
+@app.get("/works-page/{work_id}/edit")
+def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)):
+    work = db.query(models.Work).filter(models.Work.id == work_id).first()
+
+    return templates.TemplateResponse(
+        request,
+        "edit_work.html",
+        {"work": work}
+    )
+
+@app.post("/works-page/{work_id}/edit")
+def update_work_from_page(
+    work_id: int,
+    title: str = Form(...),
+    description: str = Form(...),
+    github_url: str = Form(""),
+    app_url: str = Form(""),
+    tech_stack: str = Form(""),
+    db: Session = Depends(get_db),
+):
+    work = db.query(models.Work).filter(models.Work.id == work_id).first()
+
+    if work:
+        work.title = title
+        work.description = description
+        work.github_url = github_url
+        work.app_url = app_url
+        work.tech_stack = tech_stack
+        db.commit()
+
+    return RedirectResponse(
+        url=f"/works-page/{work_id}",
+        status_code=303
+    )
+
 @app.get("/works-page/{work_id}")
 def work_detail_page(
     work_id: int,
