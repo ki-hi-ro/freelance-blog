@@ -16,7 +16,7 @@
   {% for work in works %}
     <div class="work-card">
       <h2>{{ work.title }}</h2>
-      <p>{{ work.description }}</p>
+      <p>{{ work.description | safe }}</p>
       <p><strong>技術:</strong> {{ work.tech_stack }}</p>
 
       <div class="work-actions">
