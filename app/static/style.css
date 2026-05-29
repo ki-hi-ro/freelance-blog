@@ -118,3 +118,25 @@ button {
   display: inline-block;
   margin-top: 8px;
 }
+
+.logs {
+    margin-top: 32px;
+}
+
+.log-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.log-card h3 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.log-content {
+    color: #555;
+    line-height: 1.8;
+}

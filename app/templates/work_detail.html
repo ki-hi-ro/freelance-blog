@@ -7,49 +7,47 @@
 
 <body>
 
-<h1>{{ work.title }}</h1>
+<div class="work-detail">
+  <h1>{{ work.title }}</h1>
+  <p>{{ work.description }}</p>
 
-<p>{{ work.description }}</p>
+  <p class="work-meta">使用技術: {{ work.tech_stack }}</p>
 
-<p>
-使用技術:
-{{ work.technologies }}
-</p>
-
-<a href="{{ work.github_url }}">
-GitHub
-</a>
-
-<br>
-
-<a href="{{ work.app_url }}">
-公開URL
-</a>
-
+  <div class="work-links">
+    <a href="{{ work.github_url }}">GitHub</a>
+    <a href="{{ work.public_url }}">公開URL</a>
+  </div>
+</div>
 
 <h2>開発ログ</h2>
 
-{% for post in work.posts %}
+<div class="logs">
+    {% for post in work.posts %}
+        <div class="log-card">
 
-<div>
-    <h3>{{ post.title }}</h3>
+            <h3>{{ post.title }}</h3>
 
-    <p>
-        {{ post.task_type }}
-    </p>
+            <p class="log-content">
+                {{ post.content[:50] }}...
+            </p>
 
-    <p>
-        作業時間:
-        {{ post.work_time_minutes }}分
-    </p>
+            <p>
+                <strong>作業種別:</strong>
+                {{ post.tags }}
+            </p>
 
-    <a href="/posts-page/{{ post.id }}">
-        詳細を見る
-    </a>
+            <p>
+                <strong>所要時間:</strong>
+                {{ post.work_time_minutes }}分
+            </p>
 
+            <a href="/posts-page/{{ post.id }}">
+                詳細を見る
+            </a>
+
+        </div>
+    {% endfor %}
 </div>
-
-{% endfor %}
 
 </body>
 </html>
