@@ -183,3 +183,21 @@ def create_work_from_page(
     db.commit()
 
     return RedirectResponse(url="/works-page", status_code=303)
+
+@app.get("/works-page/{work_id}")
+def work_detail_page(
+    work_id: int,
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    work = (
+        db.query(models.Work)
+        .filter(models.Work.id == work_id)
+        .first()
+    )
+
+    return templates.TemplateResponse(
+        request,
+        "work_detail.html",
+        {"work": work}
+    )

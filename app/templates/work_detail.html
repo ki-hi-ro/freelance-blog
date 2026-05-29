@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ work.title }}</title>
+</head>
+
+<body>
+
+<h1>{{ work.title }}</h1>
+
+<p>{{ work.description }}</p>
+
+<p>
+使用技術:
+{{ work.technologies }}
+</p>
+
+<a href="{{ work.github_url }}">
+GitHub
+</a>
+
+<br>
+
+<a href="{{ work.app_url }}">
+公開URL
+</a>
+
+
+<h2>開発ログ</h2>
+
+{% for post in work.posts %}
+
+<div>
+    <h3>{{ post.title }}</h3>
+
+    <p>
+        {{ post.task_type }}
+    </p>
+
+    <p>
+        作業時間:
+        {{ post.work_time_minutes }}分
+    </p>
+
+    <a href="/posts-page/{{ post.id }}">
+        詳細を見る
+    </a>
+
+</div>
+
+{% endfor %}
+
+</body>
+</html>
