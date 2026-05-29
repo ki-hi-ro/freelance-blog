@@ -2,64 +2,31 @@
 
 <h1>Freelance Work Log</h1>
 <p>成果物ごとの開発ログを記録し、技術と成長を可視化するサービスです。</p>
+
 <nav>
   <a href="/posts-page">作業ログ一覧へ</a>
+  <a href="/works-page/new">新規Workを登録する</a>
 </nav>
-<hr>
-
-<h2>新規Work登録</h2>
-
-<form action="/works-page" method="post">
-  <div>
-    <label>タイトル</label><br>
-    <input type="text" name="title">
-  </div>
-
-  <div>
-    <label>説明</label><br>
-    <textarea name="description"></textarea>
-  </div>
-
-  <div>
-    <label>GitHub URL</label><br>
-    <input type="text" name="github_url">
-  </div>
-
-  <div>
-    <label>公開URL</label><br>
-    <input type="text" name="app_url">
-  </div>
-
-  <div>
-    <label>技術（カンマ区切り）</label><br>
-    <input type="text" name="technologies">
-  </div>
-
-  <button type="submit">登録する</button>
-</form>
 
 <hr>
 
-{% for work in works %}
-  <div class="post-card">
-    <h2>{{ work.title }}</h2>
+<h2>成果物一覧</h2>
 
-    <div class="content">
-      {{ work.description | safe }}
+<div class="work-grid">
+  {% for work in works %}
+    <div class="work-card">
+      <h2>{{ work.title }}</h2>
+      <p>{{ work.description }}</p>
+      <p><strong>技術:</strong> {{ work.tech_stack }}</p>
+
+      <div class="work-actions">
+        <a href="/works-page/{{ work.id }}">開発記録を見る</a>
+      </div>
+
+      <div class="work-actions">
+        <a href="{{ work.github_url }}">GitHub</a>
+        <a href="{{ work.public_url }}">公開URL</a>
+      </div>
     </div>
-
-    <p>技術: {{ work.technologies }}</p>
-
-    <a href="/posts-page?work_id={{ work.id }}">
-      開発記録を見る
-    </a>
-
-    {% if work.github_url %}
-      <p><a href="{{ work.github_url }}" target="_blank">GitHub</a></p>
-    {% endif %}
-
-    {% if work.app_url %}
-      <p><a href="{{ work.app_url }}" target="_blank">公開URL</a></p>
-    {% endif %}
-  </div>
-{% endfor %}
+  {% endfor %}
+</div>

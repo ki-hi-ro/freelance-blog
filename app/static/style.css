@@ -140,3 +140,29 @@ button {
     color: #555;
     line-height: 1.8;
 }
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.work-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.work-card h2 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+.work-card p {
+  line-height: 1.7;
+}
+
+.work-actions {
+  margin-top: 16px;
+}
