@@ -123,20 +123,34 @@ def edit_post_page(post_id: int, request: Request, db: Session = Depends(get_db)
 @app.post("/posts-page/{post_id}/edit")
 def update_post_from_page(
     post_id: int,
-    title: str = Form(...),
     content: str = Form(...),
-    task_type: str = Form(""),  
-    work_time_minutes: int = Form(...),
+    start_time: str = Form(...),
+    end_time: str = Form(...),
     db: Session = Depends(get_db),
 ):
     post = db.query(models.Post).filter(models.Post.id == post_id).first()
 
+    start_dt = datetime.fromisoformat(start_time)
+    end_dt = datetime.fromisoformat(end_time)
+
+    work_time_minutes = int(
+        (end_dt - start_dt).total_seconds() / 60
+    )
+
+    title = content.splitlines()[0].replace("#", "").strip() if content.strip() else "作業ログ"
+
     if post:
         post.title = title
         post.content = content
-        post.task_type = task_type
+        post.start_time = start_dt
+        post.end_time = end_dt
         post.work_time_minutes = work_time_minutes
         db.commit()
+
+        return RedirectResponse(
+            url=f"/works-page/{post.work_id}",
+            status_code=303
+        )
 
     return RedirectResponse(url="/posts-page", status_code=303)
 
