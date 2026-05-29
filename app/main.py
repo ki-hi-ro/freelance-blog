@@ -1,7 +1,8 @@
 from fastapi import FastAPI, Depends, Request, Form
 from fastapi.templating import Jinja2Templates
-from sqlalchemy.orm import Session
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
+from sqlalchemy.orm import Session
 
 from app.routers import posts as posts_router
 from app.database import engine, SessionLocal
@@ -10,6 +11,8 @@ from app import models
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.include_router(posts_router.router)
 
