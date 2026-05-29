@@ -10,7 +10,7 @@ class Post(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     content = Column(String)
-    tags = Column(String)
+    task_type = Column(String)
     start_time = Column(DateTime)
     end_time = Column(DateTime)
     work_time_minutes = Column(Integer)

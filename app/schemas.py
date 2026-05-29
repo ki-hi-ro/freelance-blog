@@ -5,7 +5,7 @@ from datetime import datetime
 class Post(BaseModel):
     title: str
     content: str
-    tags: list[str]
+    task_type: str
     start_time: datetime
     end_time: datetime
 
@@ -14,7 +14,7 @@ class PostResponse(BaseModel):
     id: int
     title: str
     content: str
-    tags: list[str]
+    task_type: str
     work_time_minutes: int
     created_at: datetime
 

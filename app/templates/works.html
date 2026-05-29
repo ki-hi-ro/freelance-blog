@@ -49,6 +49,10 @@
 
     <p>技術: {{ work.technologies }}</p>
 
+    <a href="/posts-page?work_id={{ work.id }}">
+      開発記録を見る
+    </a>
+
     {% if work.github_url %}
       <p><a href="{{ work.github_url }}" target="_blank">GitHub</a></p>
     {% endif %}

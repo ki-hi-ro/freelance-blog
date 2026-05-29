@@ -39,8 +39,20 @@ def read_root():
 
 
 @app.get("/posts-page")
-def posts_page(request: Request, db: Session = Depends(get_db)):
-    posts = db.query(models.Post).all()
+def posts_page(
+    request: Request,
+    work_id: int | None = None,
+    db: Session = Depends(get_db)
+):
+    query = db.query(models.Post)
+
+    if work_id:
+        query = query.filter(
+            models.Post.work_id == work_id
+        )
+
+    posts = query.all()
+
     works = db.query(models.Work).all()
 
     for post in posts:
@@ -56,7 +68,7 @@ def posts_page(request: Request, db: Session = Depends(get_db)):
 def create_post_from_page(
     title: str = Form(...),
     content: str = Form(...),
-    tags: str = Form(""),
+    task_type: str = Form(""),
     start_time: str = Form(...),
     end_time: str = Form(...),
     work_id: int | None = Form(None),
@@ -72,7 +84,7 @@ def create_post_from_page(
     new_post = models.Post(
         title=title,
         content=content,
-        tags=tags,
+        task_type=task_type,
         start_time=start_dt,
         end_time=end_dt,
         work_time_minutes=work_time_minutes,
@@ -109,7 +121,7 @@ def update_post_from_page(
     post_id: int,
     title: str = Form(...),
     content: str = Form(...),
-    tags: str = Form(""),
+    task_type: str = Form(""),  
     work_time_minutes: int = Form(...),
     db: Session = Depends(get_db),
 ):
@@ -118,7 +130,7 @@ def update_post_from_page(
     if post:
         post.title = title
         post.content = content
-        post.tags = tags
+        post.task_type = task_type
         post.work_time_minutes = work_time_minutes
         db.commit()
 

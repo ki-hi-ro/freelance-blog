@@ -12,7 +12,7 @@ def convert_post(post):
         "id": post.id,
         "title": post.title,
         "content": post.content,
-        "tags": post.tags.split(",") if post.tags else [],
+        "task_type": post.task_type,
         "start_time": post.start_time,
         "end_time": post.end_time,
         "work_time_minutes": post.work_time_minutes,
@@ -51,7 +51,7 @@ def create_post(post: Post, db: Session = Depends(get_db)):
     new_post = models.Post(
         title=post.title,
         content=post.content,
-        tags=",".join(post.tags),
+        task_type=post.task_type,
         work_time_minutes=work_time_minutes,
     )
 
@@ -71,7 +71,7 @@ def update_post(post_id: int, post: Post, db: Session = Depends(get_db)):
 
     db_post.title = post.title
     db_post.content = post.content
-    db_post.tags = ",".join(post.tags)
+    db_post.task_type = post.task_type
     db_post.work_time_minutes = post.work_time_minutes
 
     db.commit()
