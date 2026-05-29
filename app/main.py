@@ -63,9 +63,7 @@ def posts_page(
 
 @app.post("/posts-page")
 def create_post_from_page(
-    title: str = Form(...),
     content: str = Form(...),
-    task_type: str = Form(""),
     start_time: str = Form(...),
     end_time: str = Form(...),
     work_id: int | None = Form(None),
@@ -78,10 +76,12 @@ def create_post_from_page(
         (end_dt - start_dt).total_seconds() / 60
     )
 
+    title = content.splitlines()[0].replace("#", "").strip() if content.strip() else "作業ログ"
+
     new_post = models.Post(
         title=title,
         content=content,
-        task_type=task_type,
+        task_type="",
         start_time=start_dt,
         end_time=end_dt,
         work_time_minutes=work_time_minutes,
@@ -90,6 +90,9 @@ def create_post_from_page(
 
     db.add(new_post)
     db.commit()
+
+    if work_id:
+        return RedirectResponse(url=f"/works-page/{work_id}", status_code=303)
 
     return RedirectResponse(url="/posts-page", status_code=303)
 
@@ -132,6 +135,23 @@ def update_post_from_page(
         db.commit()
 
     return RedirectResponse(url="/posts-page", status_code=303)
+
+@app.get("/posts-page/new")
+def new_post_page(
+    request: Request,
+    work_id: int | None = None,
+    db: Session = Depends(get_db)
+):
+    works = db.query(models.Work).all()
+
+    return templates.TemplateResponse(
+        request,
+        "new_post.html",
+        {
+            "works": works,
+            "selected_work_id": work_id
+        }
+    )
 
 @app.get("/posts-page/{post_id}")
 def post_detail_page(post_id: int, request: Request, db: Session = Depends(get_db)):
@@ -183,13 +203,6 @@ def create_work_from_page(
     db.commit()
 
     return RedirectResponse(url="/works-page", status_code=303)
-
-@app.get("/works-page/new")
-def new_work_page(request: Request):
-    return templates.TemplateResponse(
-        request,
-        "new_work.html"
-    )
 
 @app.get("/works-page/{work_id}")
 def work_detail_page(
