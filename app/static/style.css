@@ -36,3 +36,7 @@ button {
   border-radius: 12px;
   margin-bottom: 16px;
 }
+
+.content {
+  white-space: pre-wrap;
+}
