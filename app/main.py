@@ -41,11 +41,15 @@ def read_root():
 @app.get("/posts-page")
 def posts_page(request: Request, db: Session = Depends(get_db)):
     posts = db.query(models.Post).all()
+    works = db.query(models.Work).all()
+
+    for post in posts:
+        post.content = markdown.markdown(post.content)
 
     return templates.TemplateResponse(
         request,
         "posts.html",
-        {"posts": posts}
+        {"posts": posts, "works": works}
     )
 
 @app.post("/posts-page")
@@ -54,7 +58,8 @@ def create_post_from_page(
     content: str = Form(...),
     tags: str = Form(""),
     start_time: str = Form(...),
-    end_time: str = Form(...),    
+    end_time: str = Form(...),
+    work_id: int | None = Form(None),
     db: Session = Depends(get_db),
 ):
     start_dt = datetime.fromisoformat(start_time)
@@ -68,7 +73,10 @@ def create_post_from_page(
         title=title,
         content=content,
         tags=tags,
+        start_time=start_dt,
+        end_time=end_dt,
         work_time_minutes=work_time_minutes,
+        work_id=work_id,
     )
 
     db.add(new_post)

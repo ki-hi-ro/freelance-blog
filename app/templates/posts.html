@@ -37,6 +37,16 @@
         <input type="datetime-local" name="end_time">
     </div>
 
+    <div>
+    <label>関連Work</label><br>
+    <select name="work_id">
+        <option value="">選択なし</option>
+        {% for work in works %}
+        <option value="{{ work.id }}">{{ work.title }}</option>
+        {% endfor %}
+    </select>
+    </div>    
+
     <button type="submit">投稿する</button>
     </form>
 
