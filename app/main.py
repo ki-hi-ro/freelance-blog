@@ -5,6 +5,8 @@ from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 
 from app.routers import posts as posts_router
+from app.routers import works as works_router
+
 from app.database import engine, SessionLocal
 from app import models
 
@@ -17,6 +19,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.include_router(posts_router.router)
+app.include_router(works_router.router)
 
 templates = Jinja2Templates(directory="app/templates")
 
