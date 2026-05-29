@@ -37,15 +37,6 @@ def read_root():
 def posts_page(request: Request, db: Session = Depends(get_db)):
     posts = db.query(models.Post).all()
 
-    for post in posts:
-        post.content = markdown.markdown(
-            post.content,
-            extensions=[
-                "fenced_code",
-                "codehilite",
-            ]
-        )
-
     return templates.TemplateResponse(
         request,
         "posts.html",

@@ -42,9 +42,7 @@
     {% for post in posts %}
     <div class="post-card">
         <h2>{{ post.title }}</h2>
-        <div class="content">
-            {{ post.content | safe }}
-        </div>
+        <p>{{ post.content[:120] }}...</p>
         <p>タグ: {{ post.tags }}</p>
         <p>作業時間: {{ post.work_time_minutes }}分</p>
 
