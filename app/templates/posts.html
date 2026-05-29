@@ -9,6 +9,34 @@
     <p>開発ログ・進捗共有・技術記事を可視化するブログサービスです。</p>
 
     <hr>
+    
+    <h2>新規投稿</h2>
+
+    <form action="/posts-page" method="post">
+    <div>
+        <label>タイトル</label><br>
+        <input type="text" name="title">
+    </div>
+
+    <div>
+        <label>本文</label><br>
+        <textarea name="content"></textarea>
+    </div>
+
+    <div>
+        <label>タグ（カンマ区切り）</label><br>
+        <input type="text" name="tags">
+    </div>
+
+    <div>
+        <label>作業時間（分）</label><br>
+        <input type="number" name="work_time_minutes">
+    </div>
+
+    <button type="submit">投稿する</button>
+    </form>
+
+    <hr>    
 
     {% for post in posts %}
         <article>

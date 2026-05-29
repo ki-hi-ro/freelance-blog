@@ -1,6 +1,7 @@
-from fastapi import FastAPI, Depends, Request
+from fastapi import FastAPI, Depends, Request, Form
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
+from fastapi.responses import RedirectResponse
 
 from app.routers import posts as posts_router
 from app.database import engine, SessionLocal
@@ -35,3 +36,23 @@ def posts_page(request: Request, db: Session = Depends(get_db)):
         "posts.html",
         {"posts": posts}
     )
+
+@app.post("/posts-page")
+def create_post_from_page(
+    title: str = Form(...),
+    content: str = Form(...),
+    tags: str = Form(""),
+    work_time_minutes: int = Form(...),
+    db: Session = Depends(get_db),
+):
+    new_post = models.Post(
+        title=title,
+        content=content,
+        tags=tags,
+        work_time_minutes=work_time_minutes,
+    )
+
+    db.add(new_post)
+    db.commit()
+
+    return RedirectResponse(url="/posts-page", status_code=303)
