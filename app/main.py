@@ -168,7 +168,7 @@ def create_work_from_page(
     description: str = Form(...),
     github_url: str = Form(""),
     app_url: str = Form(""),
-    technologies: str = Form(""),
+    tech_stack: str = Form(""),
     db: Session = Depends(get_db),
 ):
     new_work = models.Work(
@@ -176,7 +176,7 @@ def create_work_from_page(
         description=description,
         github_url=github_url,
         app_url=app_url,
-        technologies=technologies,
+        tech_stack=tech_stack,
     )
 
     db.add(new_work)

@@ -29,7 +29,7 @@ class Work(Base):
     description = Column(Text, nullable=False)
     github_url = Column(String)
     app_url = Column(String)
-    technologies = Column(String)
+    tech_stack = Column(String)
     posts = relationship(
         "Post",
         back_populates="work"
