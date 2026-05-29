@@ -216,8 +216,18 @@ def work_detail_page(
         .first()
     )
 
+    posts = (
+        db.query(models.Post)
+        .filter(models.Post.work_id == work_id)
+        .order_by(models.Post.start_time.desc())
+        .all()
+    )
+
     return templates.TemplateResponse(
         request,
         "work_detail.html",
-        {"work": work}
+        {
+            "work": work,
+            "posts": posts
+        }
     )

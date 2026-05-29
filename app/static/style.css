@@ -166,3 +166,51 @@ button {
 .work-actions {
   margin-top: 16px;
 }
+
+.timeline {
+  position: relative;
+  margin-top: 32px;
+  padding-left: 32px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #ddd;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -29px;
+  top: 24px;
+  width: 14px;
+  height: 14px;
+  background: #333;
+  border-radius: 50%;
+}
+
+.timeline-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 32px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.timeline-date {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.timeline-card h3 {
+  margin-top: 0;
+}

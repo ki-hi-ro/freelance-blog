@@ -20,34 +20,32 @@
 </div>
 
 <h2>開発ログ</h2>
+
 <a href="/posts-page/new?work_id={{ work.id }}">このWorkに作業ログを追加する</a>
 
-<div class="logs">
-    {% for post in work.posts %}
-        <div class="log-card">
+<div class="timeline">
+  {% for post in posts %}
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
 
-            <h3>{{ post.title }}</h3>
+      <div class="timeline-card">
+        <p class="timeline-date">
+          {{ post.start_time.strftime('%Y.%m.%d %H:%M') }}
+        </p>
 
-            <p class="log-content">
-                {{ post.content[:50] }}...
-            </p>
+        <h3>{{ post.title }}</h3>
 
-            <p>
-                <strong>作業種別:</strong>
-                {{ post.tags }}
-            </p>
+        <p>{{ post.content[:80] }}...</p>
 
-            <p>
-                <strong>所要時間:</strong>
-                {{ post.work_time_minutes }}分
-            </p>
+        <p>
+          <strong>所要時間:</strong>
+          {{ post.work_time_minutes }}分
+        </p>
 
-            <a href="/posts-page/{{ post.id }}">
-                詳細を見る
-            </a>
-
-        </div>
-    {% endfor %}
+        <a href="/posts-page/{{ post.id }}">詳細を見る</a>
+      </div>
+    </div>
+  {% endfor %}
 </div>
 
 </body>
