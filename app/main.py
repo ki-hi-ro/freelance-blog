@@ -184,6 +184,13 @@ def create_work_from_page(
 
     return RedirectResponse(url="/works-page", status_code=303)
 
+@app.get("/works-page/new")
+def new_work_page(request: Request):
+    return templates.TemplateResponse(
+        request,
+        "new_work.html"
+    )
+
 @app.get("/works-page/{work_id}")
 def work_detail_page(
     work_id: int,

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>新規Work登録</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>新規Work登録</h1>
+
+  <form action="/works-page" method="post">
+    <div>
+      <label>タイトル</label>
+      <input type="text" name="title">
+    </div>
+
+    <div>
+      <label>説明</label>
+      <textarea name="description"></textarea>
+    </div>
+
+    <div>
+      <label>GitHub URL</label>
+      <input type="text" name="github_url">
+    </div>
+
+    <div>
+      <label>公開URL</label>
+      <input type="text" name="public_url">
+    </div>
+
+    <div>
+      <label>技術（カンマ区切り）</label>
+      <input type="text" name="tech_stack">
+    </div>
+
+    <button type="submit">登録する</button>
+  </form>
+
+  <p>
+    <a href="/works-page">成果物一覧へ戻る</a>
+  </p>
+</body>
+</html>
