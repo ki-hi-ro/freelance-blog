@@ -11,7 +11,7 @@
   <h1>{{ work.title }}</h1>
   <p>{{ work.description }}</p>
 
-  <p class="work-meta">使用技術: {{ work.tech_stack }}</p>
+  <p class="work-meta">使用技術 : {{ work.tech_stack }}</p>
 
   <div class="work-links">
     <a href="{{ work.github_url }}">GitHub</a>
@@ -29,20 +29,22 @@
       <div class="timeline-marker"></div>
 
       <div class="timeline-card">
-        <p class="timeline-date">
-          {{ post.start_time.strftime('%Y.%m.%d %H:%M') }}
-        </p>
-
-        <h3>{{ post.title }}</h3>
-
-        <p>{{ post.content[:80] }}...</p>
-
-        <p>
-          <strong>所要時間:</strong>
-          {{ post.work_time_minutes }}分
-        </p>
+          
+          <h3>{{ post.title }}</h3>
+          
+          <p>{{ post.content[:80] }}...</p>
+          
+          <p>
+            <strong>所要時間 :</strong>
+            {{ post.work_time_minutes }}分<span class="timeline-date">（{{ post.start_time.strftime('%Y.%m.%d %H:%M') }} 〜 {{ post.end_time.strftime('%Y.%m.%d %H:%M') }}）</span>
+          </p>
+          
 
         <a href="/posts-page/{{ post.id }}">詳細を見る</a>
+        <a href="/posts-page/{{ post.id }}/edit">編集</a>
+        <form action="/posts-page/{{ post.id }}/delete" method="post">
+            <button type="submit">削除</button>
+        </form>
       </div>
     </div>
   {% endfor %}

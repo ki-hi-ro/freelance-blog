@@ -101,10 +101,14 @@ def delete_post_from_page(post_id: int, db: Session = Depends(get_db)):
     db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
 
     if db_post:
+        work_id = db_post.work_id
         db.delete(db_post)
         db.commit()
 
-    return RedirectResponse(url="/posts-page", status_code=303)
+    return RedirectResponse(
+        url=f"/works-page/{work_id}",
+        status_code=303
+    )
 
 @app.get("/posts-page/{post_id}/edit")
 def edit_post_page(post_id: int, request: Request, db: Session = Depends(get_db)):

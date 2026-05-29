@@ -12,9 +12,12 @@ h1 {
 
 form {
   background: white;
-  padding: 20px;
+  padding: 20px 20px 0 0;
   border-radius: 12px;
-  margin-bottom: 24px;
+}
+
+.post-form {
+  padding: 20px;
 }
 
 input,
@@ -26,7 +29,7 @@ textarea {
 }
 
 button {
-  padding: 8px 16px;
+  padding: 3px 11px;
   cursor: pointer;
 }
 
@@ -190,7 +193,7 @@ button {
 
 .timeline-marker {
   position: absolute;
-  left: -29px;
+  left: -28.5px;
   top: 24px;
   width: 14px;
   height: 14px;
@@ -201,7 +204,7 @@ button {
 .timeline-card {
   background: #fff;
   border-radius: 16px;
-  padding: 24px 32px;
+  padding: 32px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
