@@ -56,3 +56,13 @@ def create_post_from_page(
     db.commit()
 
     return RedirectResponse(url="/posts-page", status_code=303)
+
+@app.post("/posts-page/{post_id}/delete")
+def delete_post_from_page(post_id: int, db: Session = Depends(get_db)):
+    db_post = db.query(models.Post).filter(models.Post.id == post_id).first()
+
+    if db_post:
+        db.delete(db_post)
+        db.commit()
+
+    return RedirectResponse(url="/posts-page", status_code=303)

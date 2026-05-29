@@ -9,7 +9,7 @@
     <p>開発ログ・進捗共有・技術記事を可視化するブログサービスです。</p>
 
     <hr>
-    
+
     <h2>新規投稿</h2>
 
     <form action="/posts-page" method="post">
@@ -39,14 +39,19 @@
     <hr>    
 
     {% for post in posts %}
-        <article>
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-            <p>タグ: {{ post.tags }}</p>
-            <p>作業時間: {{ post.work_time_minutes }}分</p>
-            <p>作成日時: {{ post.created_at }}</p>
-        </article>
-        <hr>
+    <article>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+        <p>タグ: {{ post.tags }}</p>
+        <p>作業時間: {{ post.work_time_minutes }}分</p>
+        <p>作成日時: {{ post.created_at }}</p>
+    </article>
+    
+    <form action="/posts-page/{{ post.id }}/delete" method="post">
+        <button type="submit">削除</button>
+    </form>    
+    
+    <hr>
     {% endfor %}
 </body>
 </html>
