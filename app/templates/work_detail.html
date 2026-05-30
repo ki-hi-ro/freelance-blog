@@ -2,15 +2,18 @@
 
 {% block content %}
 
-<h2 class="section-title">成果物詳細</h2>
-<h3 class="work-page-title">{{ work.title }}</h3>
+<div class="page-header">
 
-<a
-  href="/"
-  class="btn-back"
->
-  ← 成果物一覧へ戻る
-</a>
+    <div>
+        <h2 class="section-title">成果物詳細</h2>
+        <h3 class="work-page-title">{{ work.title }}</h3>
+    </div>
+
+    <a href="/" class="btn-back">
+      ← 成果物一覧へ戻る
+    </a>
+
+</div>
 
 <section class="work-hero">
   {% if work.image_url %}
