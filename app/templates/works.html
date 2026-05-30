@@ -17,7 +17,7 @@
   {% for work in works %}
     <div class="work-card">
       <h2>{{ work.title }}</h2>
-      <p>{{ work.description | safe }}</p>
+      <p class="work-description">{{ work.description }}</p>
       <div class="tech-tags">
           {% for tech in work.tech_stack.split(",") %}
               <span class="tech-tag">

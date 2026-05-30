@@ -90,6 +90,13 @@ button {
   margin-bottom: 32px;
 }
 
+.work-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .work-meta {
   margin: 16px 0;
   color: #555;
@@ -180,6 +187,7 @@ button {
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  min-height: 399px;
 }
 
 .work-card h2 {

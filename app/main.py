@@ -191,9 +191,6 @@ def post_detail_page(post_id: int, request: Request, db: Session = Depends(get_d
 def works_page(request: Request, db: Session = Depends(get_db)):
     works = db.query(models.Work).all()
 
-    for work in works:
-        work.description = markdown.markdown(work.description)
-
     return templates.TemplateResponse(
         request,
         "works.html",
