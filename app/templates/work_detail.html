@@ -2,21 +2,43 @@
 
 {% block content %}
 
-<div class="work-detail">
-  <h1>{{ work.title }}</h1>
-  <p>
-    <a href="/works-page">← 成果物一覧へ戻る</a>
-  </p>
-  <p>{{ work.description }}</p>
+<h2 class="section-title">成果物詳細</h2>
+<h3 class="work-page-title">{{ work.title }}</h3>
 
-  <p class="work-meta">使用技術 : {{ work.tech_stack }}</p>
+<a href="/works-page" class="back-link">
+  ← 成果物一覧へ戻る
+</a>
 
-  <div class="work-links">
-    <a href="{{ work.github_url }}">GitHub</a>
-    <a href="{{ work.public_url }}">公開URL</a>
+<section class="work-hero">
+  {% if work.image_url %}
+    <img src="{{ work.image_url }}" class="work-hero-image">
+  {% endif %}
+
+  <div class="work-hero-content">
+    <h1>{{ work.title }}</h1>
+
+    <p class="work-description">
+      {{ work.description }}
+    </p>
+
+    <div class="tech-tags">
+      {% for tech in work.tech_stack.split(",") %}
+        <span class="tech-tag">{{ tech.strip() }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="work-stats">
+      <p><strong>開発ログ:</strong> {{ posts|length }}件</p>
+      <p><strong>総作業時間:</strong> {{ total_hours }}時間{{ remaining_minutes }}分</p>
+    </div>
+
+    <div class="work-actions">
+      <a href="{{ work.github_url }}">GitHub</a>
+      <a href="{{ work.app_url }}">公開URL</a>
+      <a href="/works-page/{{ work.id }}/edit">成果物を編集する</a>
+    </div>
   </div>
-  <a href="/works-page/{{ work.id }}/edit">成果物を編集する</a>
-</div>
+</section>
 
 <h2>開発ログ</h2>
 

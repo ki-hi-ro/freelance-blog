@@ -312,11 +312,15 @@ def work_detail_page(
         .all()
     )
 
+    total_minutes = sum(post.work_time_minutes for post in posts)
+
     return templates.TemplateResponse(
         request,
         "work_detail.html",
         {
             "work": work,
-            "posts": posts
+            "posts": posts,
+            "total_hours": total_minutes // 60,
+            "remaining_minutes": total_minutes % 60,
         }
     )
