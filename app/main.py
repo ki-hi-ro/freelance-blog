@@ -170,6 +170,10 @@ def new_post_page(
 def post_detail_page(post_id: int, request: Request, db: Session = Depends(get_db)):
     post = db.query(models.Post).filter(models.Post.id == post_id).first()
 
+    duration_minutes = int(
+        (post.end_time - post.start_time).total_seconds() / 60
+    )
+
     if post:
         post.content = markdown.markdown(
             post.content,
@@ -179,7 +183,10 @@ def post_detail_page(post_id: int, request: Request, db: Session = Depends(get_d
     return templates.TemplateResponse(
         request,
         "post_detail.html",
-        {"post": post}
+        {
+            "post": post,
+            "duration_minutes": duration_minutes
+        }
     )
 
 @app.get("/")
