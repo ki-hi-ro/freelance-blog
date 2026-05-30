@@ -34,4 +34,5 @@ class Work(Base):
         "Post",
         back_populates="work"
     )    
+    image_url = Column(String)
     created_at = Column(DateTime, default=datetime.now)

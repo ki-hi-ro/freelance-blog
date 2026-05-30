@@ -223,6 +223,7 @@ def create_work_from_page(
     app_url: str = Form(""),
     tech_stack: str = Form(""),
     db: Session = Depends(get_db),
+    image_url: str = Form(""),
 ):
     new_work = models.Work(
         title=title,
@@ -230,6 +231,7 @@ def create_work_from_page(
         github_url=github_url,
         app_url=app_url,
         tech_stack=tech_stack,
+        image_url=image_url,
     )
 
     db.add(new_work)
@@ -256,6 +258,7 @@ def update_work_from_page(
     app_url: str = Form(""),
     tech_stack: str = Form(""),
     db: Session = Depends(get_db),
+    image_url: str = Form(""),
 ):
     work = db.query(models.Work).filter(models.Work.id == work_id).first()
 
@@ -265,6 +268,7 @@ def update_work_from_page(
         work.github_url = github_url
         work.app_url = app_url
         work.tech_stack = tech_stack
+        work.image_url = image_url
         db.commit()
 
     return RedirectResponse(
