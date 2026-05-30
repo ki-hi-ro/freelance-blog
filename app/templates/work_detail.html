@@ -6,7 +6,6 @@
 
     <div>
         <h2 class="section-title">成果物詳細</h2>
-        <h3 class="work-page-title">{{ work.title }}</h3>
     </div>
 
     <a href="/" class="btn-back">
@@ -16,12 +15,13 @@
 </div>
 
 <section class="work-hero">
-  {% if work.image_url %}
-    <img src="{{ work.image_url }}" class="work-hero-image">
-  {% endif %}
-
-  <div class="work-hero-content">
+    
+    <div class="work-hero-content">
     <h1>{{ work.title }}</h1>
+    
+    {% if work.image_url %}
+        <img src="{{ work.image_url }}" class="work-hero-image">
+    {% endif %}
 
     <p class="work-description">
       {{ work.description }}

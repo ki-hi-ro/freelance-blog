@@ -95,6 +95,17 @@ button {
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    white-space: pre-line;
+    line-height: 1.8;    
+}
+
+.work-hero-content .work-description {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+
+    line-height: 1.8;
 }
 
 .work-meta {
@@ -300,9 +311,7 @@ button {
 }
 
 .work-hero {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 40px;
+  display: block;
   background: #fff;
   border-radius: 24px;
   padding: 40px;
@@ -317,8 +326,16 @@ button {
   border-radius: 18px;
 }
 
+.work-hero-image {
+    width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
 .work-hero-content h1 {
   margin-top: 0;
+  margin-bottom: 45px;
 }
 
 .work-stats {
@@ -555,7 +572,7 @@ button {
 
     transition: all 0.2s ease;
 
-    margin-bottom: 23px;
+    margin-bottom: 16px;
 }
 
 .btn-back:hover {
