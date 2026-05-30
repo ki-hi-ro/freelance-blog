@@ -267,8 +267,12 @@ button {
     font-weight: 600;
 }
 
-.work-time {
-  margin-top: 16px;
-  font-weight: 600;
-  color: #444;
+.work-stats {
+    margin: 16px 0 24px;
+}
+
+.work-stats p {
+    margin: 4px 0;
+    font-weight: 600;
+    color: #444;
 }

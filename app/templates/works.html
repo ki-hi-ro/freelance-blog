@@ -26,10 +26,10 @@
           {% endfor %}
       </div>
 
-      <p class="work-time">
-        <strong>総作業時間:</strong>
-        {{ work.total_hours }}時間{{ work.remaining_minutes }}分
-      </p>      
+      <div class="work-stats">
+        <p><strong>開発ログ:</strong> {{ work.post_count }}件</p>
+        <p><strong>総作業時間:</strong> {{ work.total_hours }}時間{{ work.remaining_minutes }}分</p>
+      </div>
 
       <div class="work-actions">
         <a href="/works-page/{{ work.id }}">開発記録を見る</a>
