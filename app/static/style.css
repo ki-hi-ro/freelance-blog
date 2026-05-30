@@ -104,8 +104,8 @@ button {
     overflow: visible;
     -webkit-line-clamp: unset;
     -webkit-box-orient: unset;
-
     line-height: 1.8;
+    margin-bottom: 42px;
 }
 
 .work-meta {

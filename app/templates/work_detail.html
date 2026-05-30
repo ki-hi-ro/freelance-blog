@@ -5,7 +5,7 @@
 <div class="page-header">
 
     <div>
-        <h2 class="section-title">制作物詳細</h2>
+        <h2 class="section-title">{{ work.title }}</h2>
     </div>
 
     <a href="/" class="btn-back">
@@ -17,7 +17,6 @@
 <section class="work-hero">
     
     <div class="work-hero-content">
-    <h1>{{ work.title }}</h1>
     
     {% if work.image_url %}
         <img src="{{ work.image_url }}" class="work-hero-image">
@@ -31,11 +30,6 @@
       {% for tech in work.tech_stack.split(",") %}
         <span class="tech-tag">{{ tech.strip() }}</span>
       {% endfor %}
-    </div>
-
-    <div class="work-stats">
-      <p><strong>作業ログ:</strong> {{ posts|length }}件</p>
-      <p><strong>総作業時間:</strong> {{ total_hours }}時間{{ remaining_minutes }}分</p>
     </div>
 
     <div class="work-actions">
@@ -54,61 +48,6 @@
   </div>
 </section>
 
-
-<div class="section-header">
-    <h2>作業ログ（{{ posts|length }}件）</h2>
-
-    <a href="/posts-page/new?work_id={{ work.id }}"
-       class="primary-button">
-        作業ログを追加する
-    </a>
-</div>
-
-<div class="timeline">
-  {% for post in posts %}
-    <div class="timeline-item">
-      <div class="timeline-marker"></div>
-
-        <div class="timeline-card clickable-card"
-            onclick="location.href='/posts-page/{{ post.id }}'">
-            <h3>{{ post.title }}</h3>
-
-            <p class="log-excerpt">
-                {{ post.content[:80] }}...
-            </p>
-
-            <div class="timeline-meta">
-            <p>⏱ 作業時間: {{ post.work_time_minutes }}分</p>
-
-            {% if post.start_time.date() == post.end_time.date() %}
-                <p>📅 作業日: {{ post.start_time.strftime('%Y.%m.%d') }}</p>
-                <p>
-                🕐 時間帯:
-                {{ post.start_time.strftime('%H:%M') }}
-                〜
-                {{ post.end_time.strftime('%H:%M') }}
-                </p>
-            {% else %}
-                <p>
-                📅 作業期間:
-                {{ post.start_time.strftime('%Y.%m.%d %H:%M') }}
-                〜
-                {{ post.end_time.strftime('%Y.%m.%d %H:%M') }}
-                </p>
-            {% endif %}
-            </div>
-
-            <div class="post-actions">
-            <a href="/posts-page/{{ post.id }}" class="btn-outline">詳細を見る</a>
-            <a href="/posts-page/{{ post.id }}/edit" class="btn-outline">編集</a>
-
-            <form action="/posts-page/{{ post.id }}/delete" method="post">
-                <button type="submit" class="btn-danger">削除</button>
-            </form>
-            </div>      
-        </div>
-    </div>
-  {% endfor %}
 </div>
 
 {% endblock %}
