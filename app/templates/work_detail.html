@@ -61,12 +61,14 @@
         </a>
       {% endif %}
 
+      {% if is_logged_in %}
       <a
         href="/works-page/{{ work.id }}/edit"
         class="btn-outline"
       >
         制作物を編集する
       </a>
+      {% endif %}
 
     </div>
   </div>

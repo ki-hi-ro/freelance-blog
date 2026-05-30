@@ -25,12 +25,15 @@
       制作物一覧を見る
     </a>
 
-    <a
-      href="/works-page/new"
-      class="btn-outline"
-    >
-      新規制作物を登録する
-    </a>
+    {% if is_logged_in %}
+      <a
+        href="/works-page/new"
+        class="btn-outline"
+      >
+        新規制作物を登録する
+      </a>
+    {% endif %}
+
   </div>
 </section>
 

@@ -50,7 +50,7 @@ a {
 ========================================== */
 
 .site-title {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .site-title a {
@@ -649,4 +649,36 @@ form {
 
 .top-section {
     margin-bottom: 56px;
+}
+
+
+
+/* ==========================================
+   ログイン
+========================================== */
+
+.site-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 67px;
+}
+
+.login-link {
+    color: #4f46e5;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    opacity: 0.8;
+}
+
+.error-message {
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #ffe5e5;
+    color: #d32f2f;
+    font-size: 14px;
 }

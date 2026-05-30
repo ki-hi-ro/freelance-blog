@@ -77,7 +77,8 @@ def new_work_page(
         "new_work.html",
         {
             "works": works,
-            "selected_work_id": work_id
+            "selected_work_id": work_id,
+            "is_logged_in": "user_id" in request.session
         }
     )
 
@@ -134,7 +135,10 @@ def works_page(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse(
         request,
         "works.html",
-        {"works": works}
+        {
+            "works": works,
+            "is_logged_in": "user_id" in request.session
+        }
     )
 
 
@@ -168,6 +172,7 @@ def work_detail_page(
             "posts": posts,
             "total_hours": total_minutes // 60,
             "remaining_minutes": total_minutes % 60,
+            "is_logged_in": "user_id" in request.session
         }
     )
 
@@ -180,7 +185,10 @@ def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)
     return templates.TemplateResponse(
         request,
         "edit_work.html",
-        {"work": work}
+        {
+            "work": work,
+            "is_logged_in": "user_id" in request.session
+        }
     )
 
 

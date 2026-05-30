@@ -8,9 +8,27 @@
 
 <body>
   <header class="site-header">
-    <h1 class="site-title">
-      <a href="/">My Portfolio</a>
-    </h1>
+    <div class="site-header-top">
+      <h1 class="site-title">
+        <a href="/">My Portfolio</a>
+      </h1>
+
+      {% if is_logged_in %}
+      <a
+        href="/logout"
+        class="login-link"
+      >
+        ログアウト
+      </a>
+      {% else %}
+      <a
+        href="/login"
+        class="login-link"
+      >
+        ログイン
+      </a>
+      {% endif %}
+    </div>
 
     <p class="site-description">
       制作物・技術ブログ・職務経歴をまとめたポートフォリオサイトです。
