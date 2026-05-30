@@ -603,3 +603,50 @@ form {
   display: inline-block;
   margin-bottom: 24px;
 }
+
+
+/* ==========================================
+   top.html
+========================================== */
+
+.top-hero {
+    background: #fff;
+    border-radius: 28px;
+    padding: 56px 48px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+    margin-top: 40px;
+    margin-bottom: 56px;
+}
+
+.top-label {
+    color: #4f46e5;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.top-title {
+    font-size: 36px;
+    line-height: 1.5;
+    margin: 0 0 24px;
+}
+
+.top-description {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.9;
+    margin-bottom: 32px;
+}
+
+.top-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.top-actions .btn-outline {
+  padding: 25px 18px;
+}
+
+.top-section {
+    margin-bottom: 56px;
+}

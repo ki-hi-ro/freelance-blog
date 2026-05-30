@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="top-hero">
+  <p class="top-label">
+    Portfolio
+  </p>
+
+  <h1 class="top-title">
+    制作物・技術ブログ・職務経歴を通して、<br>
+    できることを伝えるポートフォリオです。
+  </h1>
+
+  <p class="top-description">
+    Python / FastAPI / WordPress / フロントエンド制作を中心に、
+    これまで作ってきたものと学びの記録をまとめています。
+  </p>
+
+  <div class="top-actions">
+    <a
+      href="/works-page"
+      class="primary-button"
+    >
+      制作物一覧を見る
+    </a>
+
+    <a
+      href="/works-page/new"
+      class="btn-outline"
+    >
+      新規制作物を登録する
+    </a>
+  </div>
+</section>
+
+<section class="top-section">
+  <div class="section-header">
+    <h2 class="section-title">
+      最近の制作物
+    </h2>
+
+    <nav>
+      <a href="/works-page">
+        すべて見る
+      </a>
+    </nav>
+  </div>
+
+  <div class="work-grid">
+    {% for work in works %}
+
+      <a
+        href="/works-page/{{ work.id }}"
+        class="work-card"
+      >
+        {% if work.image_url %}
+          <img
+            src="{{ work.image_url }}"
+            class="work-thumbnail"
+          >
+        {% endif %}
+
+        <h2>
+          {{ work.title }}
+        </h2>
+
+        <p class="work-description">
+          {{ work.description }}
+        </p>
+
+        <div class="tech-tags">
+          {% for tech in work.tech_stack.split(",") %}
+            <span class="tech-tag">
+              {{ tech.strip() }}
+            </span>
+          {% endfor %}
+        </div>
+      </a>
+
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}
