@@ -257,6 +257,23 @@ def update_work_from_page(
         status_code=303
     )
 
+@app.get("/works-page/new")
+def new_work_page(
+    request: Request,
+    work_id: int | None = None,
+    db: Session = Depends(get_db)
+):
+    works = db.query(models.Work).all()
+
+    return templates.TemplateResponse(
+        request,
+        "new_work.html",
+        {
+            "works": works,
+            "selected_work_id": work_id
+        }
+    )
+
 @app.get("/works-page/{work_id}")
 def work_detail_page(
     work_id: int,
