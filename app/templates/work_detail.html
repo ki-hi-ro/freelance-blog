@@ -43,9 +43,11 @@
             <a href="{{ work.github_url }}" class="btn-outline" target="_blank">GitHub</a>
         {% endif %}
 
-        {% if work.demo_url %}
-            <a href="{{ work.demo_url }}" class="btn-outline" target="_blank">公開URL</a>
-        {% endif %}
+        {% if work.app_url %}
+            <a href="{{ work.app_url }}" class="btn-outline" target="_blank">
+            公開URL
+            </a>
+        {% endif %}        
 
         <a href="/works-page/{{ work.id }}/edit" class="btn-outline">成果物を編集する</a>
     </div>
