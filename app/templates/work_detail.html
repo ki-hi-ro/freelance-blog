@@ -31,7 +31,7 @@
       <p><strong>開発ログ:</strong> {{ posts|length }}件</p>
       <p><strong>総作業時間:</strong> {{ total_hours }}時間{{ remaining_minutes }}分</p>
     </div>
-    
+
     <div class="work-actions">
         {% if work.github_url %}
             <a href="{{ work.github_url }}" class="btn-outline" target="_blank">GitHub</a>
@@ -41,7 +41,7 @@
             <a href="{{ work.demo_url }}" class="btn-outline" target="_blank">公開URL</a>
         {% endif %}
 
-        <a href="/works/{{ work.id }}/edit" class="btn-outline">成果物を編集する</a>
+        <a href="/works-page/{{ work.id }}/edit" class="btn-outline">成果物を編集する</a>
     </div>
   </div>
 </section>
