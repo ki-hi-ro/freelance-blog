@@ -5,7 +5,10 @@
 <h2 class="section-title">成果物詳細</h2>
 <h3 class="work-page-title">{{ work.title }}</h3>
 
-<a href="/" class="back-link">
+<a
+  href="/"
+  class="btn-back"
+>
   ← 成果物一覧へ戻る
 </a>
 
@@ -28,7 +31,7 @@
     </div>
 
     <div class="work-stats">
-      <p><strong>開発ログ:</strong> {{ posts|length }}件</p>
+      <p><strong>作業ログ:</strong> {{ posts|length }}件</p>
       <p><strong>総作業時間:</strong> {{ total_hours }}時間{{ remaining_minutes }}分</p>
     </div>
 
@@ -48,7 +51,7 @@
 
 
 <div class="section-header">
-    <h2>開発ログ（{{ posts|length }}件）</h2>
+    <h2>作業ログ（{{ posts|length }}件）</h2>
 
     <a href="/posts-page/new?work_id={{ work.id }}"
        class="primary-button">
@@ -90,13 +93,13 @@
             {% endif %}
             </div>
 
-            <div class="timeline-actions">
-                <a href="/posts-page/{{ post.id }}">詳細を見る</a>
-                <a href="/posts-page/{{ post.id }}/edit">編集</a>
+            <div class="post-actions">
+            <a href="/posts-page/{{ post.id }}" class="btn-outline">詳細を見る</a>
+            <a href="/posts-page/{{ post.id }}/edit" class="btn-outline">編集</a>
 
-                <form action="/posts-page/{{ post.id }}/delete" method="post">
-                    <button type="submit">削除</button>
-                </form>
+            <form action="/posts-page/{{ post.id }}/delete" method="post">
+                <button type="submit" class="btn-danger">削除</button>
+            </form>
             </div>      
         </div>
     </div>

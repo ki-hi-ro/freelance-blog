@@ -173,9 +173,10 @@ button {
     background: #4f46e5;
     color: white;
     text-decoration: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 14px 24px;
+    border-radius: 16px;    
 }
 
 .section-header nav a:hover {
@@ -439,5 +440,124 @@ button {
 }
 
 .btn-outline:hover {
+    background: #eef2ff;
+}
+
+.form-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+    margin-bottom: 23px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-textarea {
+    min-height: 120px;
+}
+
+.primary-button {
+    background: #4f46e5;
+    color: #fff;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    opacity: 0.9;
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 21px;
+}
+
+.post-actions form {
+    margin: 0;
+    padding: 0;
+}
+
+.btn-outline,
+.btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.btn-outline {
+    border: 1px solid #4f46e5;
+    color: #4f46e5;
+    background: #fff;
+}
+
+.btn-outline:hover {
+    background: #eef2ff;
+}
+
+.btn-danger {
+    border: 1px solid #ef4444;
+    color: #ef4444;
+    background: #fff;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background: #fee2e2;
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 12px 18px;
+
+    border: 1px solid #4f46e5;
+    border-radius: 12px;
+
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 700;
+
+    background: #fff;
+
+    transition: all 0.2s ease;
+
+    margin-bottom: 23px;
+}
+
+.btn-back:hover {
     background: #eef2ff;
 }

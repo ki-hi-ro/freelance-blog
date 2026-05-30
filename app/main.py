@@ -232,7 +232,7 @@ def create_work_from_page(
     db.add(new_work)
     db.commit()
 
-    return RedirectResponse(url="/works-page", status_code=303)
+    return RedirectResponse(url="/", status_code=303)
 
 @app.get("/works-page/{work_id}/edit")
 def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)):

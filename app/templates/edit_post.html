@@ -2,31 +2,53 @@
 
 {% block content %}
 
-  <h1>作業ログ編集</h1>
+<h1>{{ post.title }} を編集</h1>
 
-  <form action="/posts-page/{{ post.id }}/edit" method="post">
+<form
+  action="/posts-page/{{ post.id }}/edit"
+  method="post"
+  class="form-card"
+>
+
+  <div class="form-group">
     <label>作業ログ</label>
-    <textarea name="content">{{ post.content }}</textarea>
+    <textarea
+      class="form-textarea"
+      name="content"
+    >{{ post.content }}</textarea>
+  </div>
 
+  <div class="form-group">
     <label>開始時刻</label>
     <input
+      class="form-input"
       type="datetime-local"
       name="start_time"
       value="{{ post.start_time.strftime('%Y-%m-%dT%H:%M') }}"
     >
+  </div>
 
+  <div class="form-group">
     <label>終了時刻</label>
     <input
+      class="form-input"
       type="datetime-local"
       name="end_time"
       value="{{ post.end_time.strftime('%Y-%m-%dT%H:%M') }}"
     >
+  </div>
 
-    <button type="submit">更新する</button>
-  </form>
+  <button
+    type="submit"
+    class="primary-button"
+  >
+    更新する
+  </button>
 
-  <p>
-    <a href="/works-page/{{ post.work_id }}">成果物詳細へ戻る</a>
-  </p>
-  
+</form>
+
+<a href="/works-page/{{ post.work_id }}" class="btn-back">
+  成果物詳細へ戻る
+</a>
+
 {% endblock %}

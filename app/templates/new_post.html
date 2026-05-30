@@ -2,20 +2,27 @@
 
 {% block content %}
 
-  <h1>新規作業ログ</h1>
+<h1>新規作業ログ</h1>
 
-  <form action="/posts-page" method="post" class="post-form">
+<form action="/posts-page" method="post" class="form-card">
+  <div class="form-group">
     <label>作業ログ</label>
-    <textarea name="content"></textarea>
+    <textarea class="form-textarea" name="content"></textarea>
+  </div>
 
+  <div class="form-group">
     <label>開始時刻</label>
-    <input type="datetime-local" name="start_time">
+    <input class="form-input" type="datetime-local" name="start_time">
+  </div>
 
+  <div class="form-group">
     <label>終了時刻</label>
-    <input type="datetime-local" name="end_time">
+    <input class="form-input" type="datetime-local" name="end_time">
+  </div>
 
+  <div class="form-group">
     <label>関連Work</label>
-    <select name="work_id">
+    <select class="form-input" name="work_id">
       <option value="">選択なし</option>
       {% for work in works %}
         <option value="{{ work.id }}" {% if work.id == selected_work_id %}selected{% endif %}>
@@ -23,14 +30,14 @@
         </option>
       {% endfor %}
     </select>
+  </div>
 
-  <button type="submit">作業ログを登録する</button>
+  <button type="submit" class="primary-button">作業ログを登録する</button>
 </form>
 
-  <p>
-    <a href="/works-page/{{ selected_work_id }}">成果物詳細へ戻る</a>
-  </p>
-</body>
-</html>
+<a href="/works-page/{{ selected_work_id }}" class="btn-back">
+  成果物詳細へ戻る
+</a>
+
 
 {% endblock %}

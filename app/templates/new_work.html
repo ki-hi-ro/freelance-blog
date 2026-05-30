@@ -2,42 +2,44 @@
 
 {% block content %}
 
-  <h1>新規Work登録</h1>
+  <h1>新規成果物登録</h1>
 
-  <form action="/works-page" method="post">
-    <div>
-      <label>タイトル</label>
-      <input type="text" name="title">
-    </div>
+  <form class="form-card" method="post" action="/works-page">
+      <div class="form-group">
+          <label>タイトル</label>
+          <input class="form-input" type="text" name="title">
+      </div>
 
-    <div>
-      <label>説明</label>
-      <textarea name="description"></textarea>
-    </div>
+      <div class="form-group">
+          <label>説明</label>
+          <textarea class="form-textarea" name="description"></textarea>
+      </div>
 
-    <div>
-      <label>GitHub URL</label>
-      <input type="text" name="github_url">
-    </div>
+      <div class="form-group">
+          <label>GitHub URL</label>
+          <input class="form-input" type="text" name="github_url">
+      </div>
 
-    <div>
-      <label>公開URL</label>
-      <input type="text" name="public_url">
-    </div>
+      <div class="form-group">
+          <label>公開URL</label>
+          <input class="form-input" type="text" name="demo_url">
+      </div>
 
-    <div>
-      <label>技術（カンマ区切り）</label>
-      <input type="text" name="tech_stack">
-    </div>
+      <div class="form-group">
+          <label>技術（カンマ区切り）</label>
+          <input class="form-input" type="text" name="technologies">
+      </div>
 
-    <label>画像URL</label>
-    <input type="text" name="image_url">    
+      <div class="form-group">
+          <label>画像URL</label>
+          <input class="form-input" type="text" name="image_url">
+      </div>
 
-    <button type="submit">登録する</button>
+      <button class="primary-button" type="submit">登録する</button>
   </form>
 
-  <p>
-    <a href="/works-page">成果物一覧へ戻る</a>
-  </p>
-  
+  <a href="/" class="btn-back">
+    成果物一覧へ戻る
+  </a>
+
 {% endblock %}
