@@ -15,7 +15,8 @@
 
 <div class="work-grid">
   {% for work in works %}
-    <div class="work-card">
+
+    <a href="/works-page/{{ work.id }}" class="work-card">
       <h2>{{ work.title }}</h2>
       <p class="work-description">{{ work.description }}</p>
       <div class="tech-tags">
@@ -30,15 +31,7 @@
         <p><strong>開発ログ:</strong> {{ work.post_count }}件</p>
         <p><strong>総作業時間:</strong> {{ work.total_hours }}時間{{ work.remaining_minutes }}分</p>
       </div>
+    </a>
 
-      <div class="work-actions">
-        <a href="/works-page/{{ work.id }}">開発記録を見る</a>
-      </div>
-
-      <div class="work-actions">
-        <a href="{{ work.github_url }}">GitHub</a>
-        <a href="{{ work.public_url }}">公開URL</a>
-      </div>
-    </div>
   {% endfor %}
 </div>
