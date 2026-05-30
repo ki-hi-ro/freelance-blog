@@ -33,11 +33,6 @@ def get_db():
         db.close()
 
 
-@app.get("/")
-def read_root():
-    return {"message": "Hello, my freelance blog"}
-
-
 @app.get("/posts-page")
 def posts_page(
     request: Request,
@@ -187,7 +182,7 @@ def post_detail_page(post_id: int, request: Request, db: Session = Depends(get_d
         {"post": post}
     )
 
-@app.get("/works-page")
+@app.get("/")
 def works_page(request: Request, db: Session = Depends(get_db)):
     works = db.query(models.Work).all()
 
