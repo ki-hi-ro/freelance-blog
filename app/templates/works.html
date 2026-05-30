@@ -18,7 +18,13 @@
     <div class="work-card">
       <h2>{{ work.title }}</h2>
       <p>{{ work.description | safe }}</p>
-      <p><strong>技術:</strong> {{ work.tech_stack }}</p>
+      <div class="tech-tags">
+          {% for tech in work.tech_stack.split(",") %}
+              <span class="tech-tag">
+                  {{ tech.strip() }}
+              </span>
+          {% endfor %}
+      </div>
 
       <div class="work-actions">
         <a href="/works-page/{{ work.id }}">開発記録を見る</a>
