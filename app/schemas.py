@@ -1,14 +1,12 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-
 class Post(BaseModel):
     title: str
     content: str
     task_type: str
     start_time: datetime
     end_time: datetime
-
 
 class PostResponse(BaseModel):
     id: int
@@ -27,7 +25,6 @@ class Work(BaseModel):
     github_url: str | None = None
     app_url: str | None = None
     technologies: list[str]
-
 
 class WorkResponse(BaseModel):
     id: int

@@ -2,16 +2,18 @@
 
 {% block content %}
 
-<h1 class="section-title">{{ work.title }} を編集</h1>
+<h1 class="section-title">
+  {{ work.title }} を編集
+</h1>
 
 <form
   action="/works-page/{{ work.id }}/edit"
   method="post"
   class="form-card"
 >
-
   <div class="form-group">
     <label>タイトル</label>
+
     <input
       class="form-input"
       type="text"
@@ -22,6 +24,7 @@
 
   <div class="form-group">
     <label>説明</label>
+
     <textarea
       class="form-textarea"
       name="description"
@@ -30,6 +33,7 @@
 
   <div class="form-group">
     <label>GitHub URL</label>
+
     <input
       class="form-input"
       type="text"
@@ -40,6 +44,7 @@
 
   <div class="form-group">
     <label>公開URL</label>
+
     <input
       class="form-input"
       type="text"
@@ -50,6 +55,7 @@
 
   <div class="form-group">
     <label>技術（カンマ区切り）</label>
+
     <input
       class="form-input"
       type="text"
@@ -60,6 +66,7 @@
 
   <div class="form-group">
     <label>画像URL</label>
+
     <input
       class="form-input"
       type="text"
@@ -74,12 +81,13 @@
   >
     更新する
   </button>
-
 </form>
 
-<a href="/works-page/{{ work.id }}" class="btn-back">
+<a
+  href="/works-page/{{ work.id }}"
+  class="btn-back"
+>
   制作物詳細へ戻る
 </a>
-
 
 {% endblock %}

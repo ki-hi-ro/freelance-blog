@@ -2,35 +2,48 @@
 
 {% block content %}
 
-  <div class="section-header">
-      <h2 class="section-title">
-        制作物一覧
+<div class="section-header">
+  <h2 class="section-title">
+    制作物一覧
+  </h2>
+
+  <nav>
+    <a href="/works-page/new">
+      新規制作物を登録する
+    </a>
+  </nav>
+</div>
+
+<div class="work-grid">
+  {% for work in works %}
+
+    <a
+      href="/works-page/{{ work.id }}"
+      class="work-card"
+    >
+      {% if work.image_url %}
+        <img
+          src="{{ work.image_url }}"
+          class="work-thumbnail"
+        >
+      {% endif %}
+
+      <h2>
+        {{ work.title }}
       </h2>
 
-      <nav>
-          <a href="/works-page/new">新規制作物を登録する</a>
-      </nav>
-  </div>
+      <p class="work-description">{{ work.description }}</p>
 
-  <div class="work-grid">
-    {% for work in works %}
+      <div class="tech-tags">
+        {% for tech in work.tech_stack.split(",") %}
+          <span class="tech-tag">
+            {{ tech.strip() }}
+          </span>
+        {% endfor %}
+      </div>
+    </a>
 
-      <a href="/works-page/{{ work.id }}" class="work-card">
-        {% if work.image_url %}
-          <img src="{{ work.image_url }}" class="work-thumbnail">
-        {% endif %}      
-        <h2>{{ work.title }}</h2>
-        <p class="work-description">{{ work.description }}</p>
-        <div class="tech-tags">
-            {% for tech in work.tech_stack.split(",") %}
-                <span class="tech-tag">
-                    {{ tech.strip() }}
-                </span>
-            {% endfor %}
-        </div>
-      </a>
-
-    {% endfor %}
-  </div>
+  {% endfor %}
+</div>
 
 {% endblock %}

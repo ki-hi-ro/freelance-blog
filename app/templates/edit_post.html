@@ -2,16 +2,18 @@
 
 {% block content %}
 
-<h1 class="section-title">{{ post.title }} を編集</h1>
+<h1 class="section-title">
+  {{ post.title }} を編集
+</h1>
 
 <form
   action="/posts-page/{{ post.id }}/edit"
   method="post"
   class="form-card"
 >
-
   <div class="form-group">
     <label>作業ログ</label>
+
     <textarea
       class="form-textarea"
       name="content"
@@ -20,6 +22,7 @@
 
   <div class="form-group">
     <label>開始時刻</label>
+
     <input
       class="form-input"
       type="datetime-local"
@@ -30,6 +33,7 @@
 
   <div class="form-group">
     <label>終了時刻</label>
+
     <input
       class="form-input"
       type="datetime-local"
@@ -44,10 +48,12 @@
   >
     更新する
   </button>
-
 </form>
 
-<a href="/posts-page/{{ post.id }}" class="btn-back">
+<a
+  href="/posts-page/{{ post.id }}"
+  class="btn-back"
+>
   詳細へ戻る
 </a>
 

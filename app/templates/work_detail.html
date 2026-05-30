@@ -3,23 +3,28 @@
 {% block content %}
 
 <div class="page-header">
+  <div>
+    <h2 class="section-title">
+      {{ work.title }}
+    </h2>
+  </div>
 
-    <div>
-        <h2 class="section-title">{{ work.title }}</h2>
-    </div>
-
-    <a href="/" class="btn-back">
-      ← 制作物一覧へ戻る
-    </a>
-
+  <a
+    href="/"
+    class="btn-back"
+  >
+    ← 制作物一覧へ戻る
+  </a>
 </div>
 
 <section class="work-hero">
-    
-    <div class="work-hero-content">
-    
+  <div class="work-hero-content">
+
     {% if work.image_url %}
-        <img src="{{ work.image_url }}" class="work-hero-image">
+      <img
+        src="{{ work.image_url }}"
+        class="work-hero-image"
+      >
     {% endif %}
 
     <p class="work-description">
@@ -28,26 +33,43 @@
 
     <div class="tech-tags">
       {% for tech in work.tech_stack.split(",") %}
-        <span class="tech-tag">{{ tech.strip() }}</span>
+        <span class="tech-tag">
+          {{ tech.strip() }}
+        </span>
       {% endfor %}
     </div>
 
     <div class="work-actions">
-        {% if work.github_url %}
-            <a href="{{ work.github_url }}" class="btn-outline" target="_blank">GitHub</a>
-        {% endif %}
 
-        {% if work.app_url %}
-            <a href="{{ work.app_url }}" class="btn-outline" target="_blank">
-            公開URL
-            </a>
-        {% endif %}        
+      {% if work.github_url %}
+        <a
+          href="{{ work.github_url }}"
+          class="btn-outline"
+          target="_blank"
+        >
+          GitHub
+        </a>
+      {% endif %}
 
-        <a href="/works-page/{{ work.id }}/edit" class="btn-outline">制作物を編集する</a>
+      {% if work.app_url %}
+        <a
+          href="{{ work.app_url }}"
+          class="btn-outline"
+          target="_blank"
+        >
+          公開URL
+        </a>
+      {% endif %}
+
+      <a
+        href="/works-page/{{ work.id }}/edit"
+        class="btn-outline"
+      >
+        制作物を編集する
+      </a>
+
     </div>
   </div>
 </section>
-
-</div>
 
 {% endblock %}

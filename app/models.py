@@ -3,7 +3,6 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.database import Base
 
-
 class Post(Base):
     __tablename__ = "posts"
 

@@ -2,44 +2,89 @@
 
 {% block content %}
 
-  <h1 class="section-title">新規制作物登録</h1>
+<div class="section-header">
+  <h2 class="section-title">
+    新規制作物登録
+  </h2>
+</div>
 
-  <form class="form-card" method="post" action="/works-page">
-      <div class="form-group">
-          <label>タイトル</label>
-          <input class="form-input" type="text" name="title">
-      </div>
+<form
+  action="/works-page"
+  method="post"
+  class="form-card"
+>
+  <div class="form-group">
+    <label>タイトル</label>
 
-      <div class="form-group">
-          <label>説明</label>
-          <textarea class="form-textarea" name="description"></textarea>
-      </div>
+    <input
+      class="form-input"
+      type="text"
+      name="title"
+    >
+  </div>
 
-      <div class="form-group">
-          <label>GitHub URL</label>
-          <input class="form-input" type="text" name="github_url">
-      </div>
+  <div class="form-group">
+    <label>説明</label>
 
-      <div class="form-group">
-          <label>公開URL</label>
-          <input class="form-input" type="text" name="demo_url">
-      </div>
+    <textarea
+      class="form-textarea"
+      name="description"
+    ></textarea>
+  </div>
 
-      <div class="form-group">
-          <label>技術（カンマ区切り）</label>
-          <input class="form-input" type="text" name="technologies">
-      </div>
+  <div class="form-group">
+    <label>GitHub URL</label>
 
-      <div class="form-group">
-          <label>画像URL</label>
-          <input class="form-input" type="text" name="image_url">
-      </div>
+    <input
+      class="form-input"
+      type="text"
+      name="github_url"
+    >
+  </div>
 
-      <button class="primary-button" type="submit">登録する</button>
-  </form>
+  <div class="form-group">
+    <label>公開URL</label>
 
-  <a href="/" class="btn-back">
-    制作物一覧へ戻る
-  </a>
+    <input
+      class="form-input"
+      type="text"
+      name="demo_url"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>技術（カンマ区切り）</label>
+
+    <input
+      class="form-input"
+      type="text"
+      name="technologies"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>画像URL</label>
+
+    <input
+      class="form-input"
+      type="text"
+      name="image_url"
+    >
+  </div>
+
+  <button
+    class="primary-button"
+    type="submit"
+  >
+    登録する
+  </button>
+</form>
+
+<a
+  href="/"
+  class="btn-back"
+>
+  制作物一覧へ戻る
+</a>
 
 {% endblock %}

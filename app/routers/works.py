@@ -1,12 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-
 from app import models
 from app.schemas import Work, WorkResponse
-from app.database import SessionLocal
+from fastapi import APIRouter, Depends, Request, Form
+from fastapi.responses import RedirectResponse
+from sqlalchemy.orm import Session
+from app import models
+from fastapi.templating import Jinja2Templates
+from app.database import get_db
 
 router = APIRouter()
-
 
 def convert_work(work):
     return {
@@ -19,25 +20,14 @@ def convert_work(work):
         "created_at": work.created_at,
     }
 
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+templates = Jinja2Templates(directory="app/templates")
 
 
-@router.get("/works", response_model=list[WorkResponse])
-def read_works(db: Session = Depends(get_db)):
-    works = db.query(models.Work).all()
+# =========================
+# API Endpoints
+# =========================
 
-    return [
-        convert_work(work)
-        for work in works
-    ]
-
-
+# Create
 @router.post("/works", response_model=WorkResponse)
 def create_work(
     work: Work,
@@ -56,3 +46,168 @@ def create_work(
     db.refresh(new_work)
 
     return convert_work(new_work)
+
+
+# Read
+@router.get("/works", response_model=list[WorkResponse])
+def read_works(db: Session = Depends(get_db)):
+    works = db.query(models.Work).all()
+
+    return [
+        convert_work(work)
+        for work in works
+    ]
+
+
+# =========================
+# HTML Pages
+# =========================
+
+# Create（画面）
+@router.get("/works-page/new")
+def new_work_page(
+    request: Request,
+    work_id: int | None = None,
+    db: Session = Depends(get_db)
+):
+    works = db.query(models.Work).all()
+
+    return templates.TemplateResponse(
+        request,
+        "new_work.html",
+        {
+            "works": works,
+            "selected_work_id": work_id
+        }
+    )
+
+
+#Create（処理）
+@router.post("/works-page")
+def create_work_from_page(
+    title: str = Form(...),
+    description: str = Form(...),
+    github_url: str = Form(""),
+    app_url: str = Form(""),
+    tech_stack: str = Form(""),
+    db: Session = Depends(get_db),
+    image_url: str = Form(""),
+):
+    new_work = models.Work(
+        title=title,
+        description=description,
+        github_url=github_url,
+        app_url=app_url,
+        tech_stack=tech_stack,
+        image_url=image_url,
+    )
+
+    db.add(new_work)
+    db.commit()
+
+    return RedirectResponse(url="/", status_code=303)
+
+
+# Read（一覧）
+@router.get("/")
+def works_page(request: Request, db: Session = Depends(get_db)):
+    works = db.query(models.Work).all()
+
+    for work in works:
+        posts = (
+            db.query(models.Post)
+            .filter(models.Post.work_id == work.id)
+            .all()
+        )
+
+        work.post_count = len(posts)
+
+        total_minutes = sum(
+            post.work_time_minutes
+            for post in posts
+        )
+
+        work.total_minutes = total_minutes
+        work.total_hours = total_minutes // 60
+        work.remaining_minutes = total_minutes % 60        
+
+    return templates.TemplateResponse(
+        request,
+        "works.html",
+        {"works": works}
+    )
+
+
+# Read（詳細）
+@router.get("/works-page/{work_id}")
+def work_detail_page(
+    work_id: int,
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    work = (
+        db.query(models.Work)
+        .filter(models.Work.id == work_id)
+        .first()
+    )
+
+    posts = (
+        db.query(models.Post)
+        .filter(models.Post.work_id == work_id)
+        .order_by(models.Post.start_time.desc())
+        .all()
+    )
+
+    total_minutes = sum(post.work_time_minutes for post in posts)
+
+    return templates.TemplateResponse(
+        request,
+        "work_detail.html",
+        {
+            "work": work,
+            "posts": posts,
+            "total_hours": total_minutes // 60,
+            "remaining_minutes": total_minutes % 60,
+        }
+    )
+
+
+# Update（画面）
+@router.get("/works-page/{work_id}/edit")
+def edit_work_page(work_id: int, request: Request, db: Session = Depends(get_db)):
+    work = db.query(models.Work).filter(models.Work.id == work_id).first()
+
+    return templates.TemplateResponse(
+        request,
+        "edit_work.html",
+        {"work": work}
+    )
+
+
+# Update（処理）
+@router.post("/works-page/{work_id}/edit")
+def update_work_from_page(
+    work_id: int,
+    title: str = Form(...),
+    description: str = Form(...),
+    github_url: str = Form(""),
+    app_url: str = Form(""),
+    tech_stack: str = Form(""),
+    db: Session = Depends(get_db),
+    image_url: str = Form(""),
+):
+    work = db.query(models.Work).filter(models.Work.id == work_id).first()
+
+    if work:
+        work.title = title
+        work.description = description
+        work.github_url = github_url
+        work.app_url = app_url
+        work.tech_stack = tech_stack
+        work.image_url = image_url
+        db.commit()
+
+    return RedirectResponse(
+        url=f"/works-page/{work_id}",
+        status_code=303
+    )
