@@ -191,6 +191,18 @@ def post_detail_page(post_id: int, request: Request, db: Session = Depends(get_d
 def works_page(request: Request, db: Session = Depends(get_db)):
     works = db.query(models.Work).all()
 
+    for work in works:
+        total_minutes = sum(
+            post.work_time_minutes
+            for post in db.query(models.Post)
+            .filter(models.Post.work_id == work.id)
+            .all()
+        )
+
+        work.total_minutes = total_minutes
+        work.total_hours = total_minutes // 60
+        work.remaining_minutes = total_minutes % 60
+
     return templates.TemplateResponse(
         request,
         "works.html",
