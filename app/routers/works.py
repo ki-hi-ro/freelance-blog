@@ -109,7 +109,7 @@ def create_work_from_page(
 
 
 # Read（一覧）
-@router.get("/")
+@router.get("/works-page")
 def works_page(request: Request, db: Session = Depends(get_db)):
     works = db.query(models.Work).all()
 
