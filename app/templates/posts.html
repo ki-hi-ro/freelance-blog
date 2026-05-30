@@ -1,62 +1,8 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>Freelance Work Log</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <h1>Freelance Work Log</h1>
-    <p>成果物ごとの開発ログを記録し、技術と成長を可視化するサービスです。</p>
+{% extends "base.html" %}
 
-    <nav>
-        <a href="/works-page">成果物一覧へ</a>
-    </nav>
-
-    <hr>
-
-    <h2>新規作業ログ</h2>
-
-    <form action="/posts-page" method="post">
-    <div>
-        <label>タイトル</label><br>
-        <input type="text" name="title">
-    </div>
-
-    <div>
-        <label>作業内容</label><br>
-        <textarea name="content"></textarea>
-    </div>
-
-    <div>
-        <label>作業種別</label>
-        <input type="text" name="task_type">
-    </div>
-
-    <div>
-        <label>開始時刻</label>
-        <input type="datetime-local" name="start_time">
-
-        <label>終了時刻</label>
-        <input type="datetime-local" name="end_time">
-    </div>
-
-    <div>
-    <label>関連Work</label><br>
-    <p><a href="/works-page">新規Workを登録する</a></p>
-    <select name="work_id">
-        <option value="">選択なし</option>
-        {% for work in works %}
-        <option value="{{ work.id }}">{{ work.title }}</option>
-        {% endfor %}
-    </select>
-    </div>
+{% block content %}
     
-
-    <button type="submit">作業ログを登録する</button>
-    </form>
-
-    <hr>    
+    <h1>作業ログ一覧</h1>
 
     {% for post in posts %}
     <div class="post-card">
@@ -81,6 +27,6 @@
 
         <a href="/posts-page/{{ post.id }}">作業ログ詳細を見る</a>
     </div>
-    {% endfor %}    
-</body>
-</html>
+    {% endfor %}  
+
+{% endblock %}

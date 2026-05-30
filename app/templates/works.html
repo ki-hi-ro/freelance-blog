@@ -1,40 +1,39 @@
-<link rel="stylesheet" href="/static/style.css">
+{% extends "base.html" %}
 
-<h1>Freelance Work Log</h1>
-<p>成果物ごとの開発ログを記録し、技術と成長を可視化するサービスです。</p>
+{% block content %}
 
-<hr>
+  <div class="section-header">
+      <h2>成果物一覧</h2>
 
-<div class="section-header">
-    <h2>成果物一覧</h2>
+      <nav>
+          <a href="/works-page/new">新規Workを登録する</a>
+      </nav>
+  </div>
 
-    <nav>
-        <a href="/works-page/new">新規Workを登録する</a>
-    </nav>
-</div>
+  <div class="work-grid">
+    {% for work in works %}
 
-<div class="work-grid">
-  {% for work in works %}
+      <a href="/works-page/{{ work.id }}" class="work-card">
+        {% if work.image_url %}
+          <img src="{{ work.image_url }}" class="work-thumbnail">
+        {% endif %}      
+        <h2>{{ work.title }}</h2>
+        <p class="work-description">{{ work.description }}</p>
+        <div class="tech-tags">
+            {% for tech in work.tech_stack.split(",") %}
+                <span class="tech-tag">
+                    {{ tech.strip() }}
+                </span>
+            {% endfor %}
+        </div>
 
-    <a href="/works-page/{{ work.id }}" class="work-card">
-      {% if work.image_url %}
-        <img src="{{ work.image_url }}" class="work-thumbnail">
-      {% endif %}      
-      <h2>{{ work.title }}</h2>
-      <p class="work-description">{{ work.description }}</p>
-      <div class="tech-tags">
-          {% for tech in work.tech_stack.split(",") %}
-              <span class="tech-tag">
-                  {{ tech.strip() }}
-              </span>
-          {% endfor %}
-      </div>
+        <div class="work-stats">
+          <p><strong>開発ログ:</strong> {{ work.post_count }}件</p>
+          <p><strong>総作業時間:</strong> {{ work.total_hours }}時間{{ work.remaining_minutes }}分</p>
+        </div>
+      </a>
 
-      <div class="work-stats">
-        <p><strong>開発ログ:</strong> {{ work.post_count }}件</p>
-        <p><strong>総作業時間:</strong> {{ work.total_hours }}時間{{ work.remaining_minutes }}分</p>
-      </div>
-    </a>
-
-  {% endfor %}
-</div>
+    {% endfor %}
+  </div>
+  
+{% endblock %}

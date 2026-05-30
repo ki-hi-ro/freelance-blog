@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>作業ログ編集</title>
-  <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+
   <h1>作業ログ編集</h1>
 
   <form action="/posts-page/{{ post.id }}/edit" method="post">
@@ -32,5 +28,5 @@
   <p>
     <a href="/works-page/{{ post.work_id }}">成果物詳細へ戻る</a>
   </p>
-</body>
-</html>
+  
+{% endblock %}

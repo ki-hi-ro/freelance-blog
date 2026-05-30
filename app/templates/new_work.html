@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>新規Work登録</title>
-  <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+
   <h1>新規Work登録</h1>
 
   <form action="/works-page" method="post">
@@ -43,5 +39,5 @@
   <p>
     <a href="/works-page">成果物一覧へ戻る</a>
   </p>
-</body>
-</html>
+  
+{% endblock %}

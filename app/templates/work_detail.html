@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ work.title }}</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
+{% extends "base.html" %}
 
-<body>
+{% block content %}
 
 <div class="work-detail">
   <h1>{{ work.title }}</h1>
@@ -54,5 +49,4 @@
   {% endfor %}
 </div>
 
-</body>
-</html>
+{% endblock %}

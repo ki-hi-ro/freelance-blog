@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ post.title }}</title>
-  <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+
   <div class="post-card">
     <h1>{{ post.title }}</h1>
 
@@ -19,5 +15,5 @@
 
     <a href="/posts-page">一覧へ戻る</a>
   </div>
-</body>
-</html>
+  
+{% endblock %}

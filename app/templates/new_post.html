@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>新規作業ログ</title>
-  <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+
   <h1>新規作業ログ</h1>
 
   <form action="/posts-page" method="post" class="post-form">
@@ -36,3 +32,5 @@
   </p>
 </body>
 </html>
+
+{% endblock %}
