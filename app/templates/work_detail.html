@@ -5,7 +5,7 @@
 <h2 class="section-title">成果物詳細</h2>
 <h3 class="work-page-title">{{ work.title }}</h3>
 
-<a href="/works-page" class="back-link">
+<a href="/" class="back-link">
   ← 成果物一覧へ戻る
 </a>
 
@@ -31,11 +31,17 @@
       <p><strong>開発ログ:</strong> {{ posts|length }}件</p>
       <p><strong>総作業時間:</strong> {{ total_hours }}時間{{ remaining_minutes }}分</p>
     </div>
-
+    
     <div class="work-actions">
-      <a href="{{ work.github_url }}">GitHub</a>
-      <a href="{{ work.app_url }}">公開URL</a>
-      <a href="/works-page/{{ work.id }}/edit">成果物を編集する</a>
+        {% if work.github_url %}
+            <a href="{{ work.github_url }}" class="btn-outline" target="_blank">GitHub</a>
+        {% endif %}
+
+        {% if work.demo_url %}
+            <a href="{{ work.demo_url }}" class="btn-outline" target="_blank">公開URL</a>
+        {% endif %}
+
+        <a href="/works/{{ work.id }}/edit" class="btn-outline">成果物を編集する</a>
     </div>
   </div>
 </section>
